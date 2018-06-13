@@ -33,7 +33,7 @@
 
 $(document).ready(function(){
     //checkbox trong table
-    $('#select_all-menu').change(function() {
+    $('.select_all-menu').change(function() {
         var checkboxes = $(this).closest('table').find(':checkbox');
         checkboxes.prop('checked', $(this).is(':checked'));
     });

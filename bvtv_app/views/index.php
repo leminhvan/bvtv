@@ -191,8 +191,8 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
 
-        $('#tabledata').DataTable( {
-            "pageLength": 15,
+        $('#tabledata, #tabledata1, #tabledata2').DataTable( {
+            "pageLength": 10,
             "lengthMenu":[10, 15, 25, 45, 75, 100],
              "language": {
                     "decimal":        "",

@@ -35,6 +35,7 @@ class Chuangoc extends CI_Controller{
     */
     public function index(){
         if($this->menu->check_phanquyen("chuangoc_1")){
+            
             $source       = $this->chuangoc_model->get_all();
             foreach($source as $row):
                         $temp[] = $row;
@@ -44,7 +45,8 @@ class Chuangoc extends CI_Controller{
 
             $now = date('d-m-Y');
             $this->data['chuangocs'] = array();
-            $this->data['bvtv_hc_hethan'] = array();
+            $this->data['chuangocs_hethan'] = array();
+            $this->data['chuangocs_saphethan'] = array();
             $this->data['notification'] = array();
 
             $count_saphethan = 0;
@@ -53,35 +55,41 @@ class Chuangoc extends CI_Controller{
                     $exp = $value['hcgoc_expday'];//DateTime::createFromFormat('d/m/Y', $value['hcgoc_expday'])->format('Y-m-d');
                     $diff = (strtotime($exp)-strtotime($now ))/86400 ;
 
-                    if($diff > 0 ) {
+                    if($diff >= 0 ) {
                         
                         if ($diff >=0 AND $diff <30){
                             $count_saphethan ++;
                             $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-danger"> '.$diff.' ngày</span>';
+                            array_push($this->data['chuangocs_saphethan'], $value);
                         }
                         if ($diff >=30 AND $diff <60){
                             $count_saphethan ++;
                             $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-warning"> '.$diff.' ngày</span>';
+                            array_push($this->data['chuangocs_saphethan'], $value);
                         }
                         if ($diff >=60 AND $diff <90){
                             $count_saphethan ++;
                             $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-primary">  '.$diff.' ngày</span>';
+                            array_push($this->data['chuangocs_saphethan'], $value);
                         }
                         if ($diff >=90 AND $diff <120){
                             $count_saphethan ++;
                             $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-success">  '.$diff.' ngày</span>';
+                            array_push($this->data['chuangocs_saphethan'], $value);
                         }
                         array_push($this->data['chuangocs'], $value);
+                    }else{
+                        array_push($this->data['chuangocs_hethan'], $value);
                     }
                 }
             }
-
             //hiện trên thanh thông báo
             if($count_saphethan > 0){
-                $this->data['notification'][] = array('link' => 'chuangoc/hc_saphethan', 
+                $this->data['notification'][] = array('link' => 'chuangoc', 
                                                         'title' => 'Chuẩn sắp hết hạn', 
                                                         'icon' =>'<i class="md md-warning md-2x"></i>', 
-                                                        'message' => 'Có '.$count_saphethan.' hóa chất');
+                                                        'message' => 'Có '.$count_saphethan.' hóa chất',
+                                                    );
             }
             $this->template->js_add($this->get_key_name, "embed");
             $this->template->js_add('var csrfName = "'.$this->security->get_csrf_token_name().'";
@@ -137,14 +145,30 @@ class Chuangoc extends CI_Controller{
 
                                                 if(result.action == "autoten"){
                                                    console.log(result.data);
-                                                }  
+                                                } 
+
+                                                if(result.action == "dathang"){
+                                                   if(result.data == true){
+                                                        $("#data_id_"+id).remove();
+                                                        swal({   
+                                                            title: "Thành công!",   
+                                                            timer: 1000,   
+                                                            type: "success", 
+                                                        });   
+                                                    }
+                                                    if(result.data == false){
+                                                        swal({   
+                                                            title: "Lỗi!",   
+                                                            timer: 1000,   
+                                                            type: "error", 
+                                                        });  
+                                                    }
+                                                }   
                                             }
                                         };
                                         // Truyền object vào để gọi ajax
                                         $.ajax(agrs);
                                     }', "embed");
-            
-            
             if($this->session->flashdata('notify') != NULL){
                 $this->template->js_add("notify('".$this->session->flashdata('notify')['message']."', '".$this->session->flashdata('notify')['type']."');",'embed');
             }
@@ -156,243 +180,15 @@ class Chuangoc extends CI_Controller{
         }//end check phan quyen
     }
 
-    public function hethan(){
-        if($this->menu->check_phanquyen("chuan-het-han_1")){
-            $source       = $this->chuangoc_model->get_all();
-            foreach($source as $row):
-                        $temp[] = $row;
-            endforeach;
-            unset($source);
-            date_default_timezone_set('Asia/Ho_Chi_Minh'); //set mui gio, khong se bi sai
-
-            $now = date('d-m-Y');
-            $this->data['chuangocs'] = array();
-            $this->data['notification'] = array();
-
-            foreach ($temp  as $key => $value) {
-                if($value['hcgoc_expday'] !=''){
-                    $exp = $value['hcgoc_expday'];//DateTime::createFromFormat('d/m/Y', $value['hcgoc_expday'])->format('Y-m-d');
-                    $diff = (strtotime($exp)-strtotime($now ))/86400 ;
-
-                    if($diff <= 0 ) {
-                      array_push($this->data['chuangocs'], $value);
-                   }
-                }
-            }
-            $this->template->js_add($this->get_key_name, "embed");
-            $this->template->js_add('var csrfName = "'.$this->security->get_csrf_token_name().'";
-                                    var csrfHash = "'.$this->security->get_csrf_hash().'";
-                                    function ajax_action(id, action) {
-                                        var data ={"id": id, "action": action}; data[csrfName] = csrfHash;
-                                        var agrs = {
-                                            url : "'.base_url().'hoachat/chuangoc/ajax_action", // gửi ajax đến file result.php
-                                            type : "post", // chọn phương thức gửi là post
-                                            dataType:"json", // dữ liệu trả về dạng text
-                                            data : data,
-                                            success : function (result){
-                                                if(result.csrfName){ csrfName = result.csrfName; csrfHash = result.csrfHash;}
-                                                if(result.data == 1 && result.action == "del"){
-                                                    $("#data_id_"+id).remove();
-                                                    swal({   
-                                                        title: "Đã xóa!",   
-                                                        timer: 2000,   
-                                                        type: "success", 
-                                                    });   
-                                                }
-                                                if(result.data == 0 && result.action == "del"){
-                                                    swal("Lỗi", result.data, "error"); 
-                                                }
-                                                
-                                                if(result.action == "detail"){
-                                                    var re = result.data;
-                                                    var tempalte = ""; 
-                                                    $.each(re ,function(key, val){
-                                                        if(key != "hcgoc_id" ){
-                                                            if(key != "hcgoc_dathang"){
-                                                                tempalte += "<tr>";
-                                                                tempalte +=      "<td width=\'120\' class=\'font-weight-bold\'>" + get_title(key) + "</td>";
-                                                                tempalte +=      "<td > " + val +"</td>";
-                                                                tempalte += "</tr>";
-                                                            }
-                                                            if(key == "hcgoc_dathang" && (val != null || val != "") ){
-                                                                var datmua;
-                                                                if(val == "1") {
-                                                                    datmua = "Đã đặt hàng";
-                                                                    tempalte += "<tr>";
-                                                                    tempalte +=      "<td width=\'120\' class=\'font-weight-bold\'>" + get_title(key) + "</td>";
-                                                                    tempalte +=      "<td > " + datmua +"</td>";
-                                                                    tempalte += "</tr>";
-                                                                }
-                                                            }
-                                                            
-                                                        }
-                                                    });
-                                                    $(".result").html(tempalte);
-                                                }  
-
-                                                if(result.action == "autoten"){
-                                                   console.log(result.data);
-                                                }  
-                                            }
-                                        };
-                                        // Truyền object vào để gọi ajax
-                                        $.ajax(agrs);
-
-                                    }', "embed");
-            
-            if($this->session->flashdata('notify') != NULL){
-                $this->template->js_add("notify('".$this->session->flashdata('notify')['message']."', '".$this->session->flashdata('notify')['type']."');",'embed');
-            }
-            $this->template->load('index', 'chuangoc/view',$this->data);
-            unset( $temp); unset($source);
-        }else{
-            $this->session->set_flashdata('notify', notify('Không có quyền truy cập','warning'));
-            redirect('hoachat/chuangoc');
-        }
-    }
-
-public function hc_saphethan() {
-    if($this->menu->check_phanquyen("chuan-sap-het-han_1")){
-        $source       = $this->chuangoc_model->get_all();
-        foreach($source as $row):
-                    $temp[] = $row;
-        endforeach;
-        unset($source);
-        date_default_timezone_set('Asia/Ho_Chi_Minh'); //set mui gio, khong se bi sai
-
-        $now = date('d-m-Y');
-        $this->data['chuangocs'] = array();
-
-        foreach ($temp  as $key => $value) {
-
-            //hien thi trang thai da dat mua
-            //if ($value['hcgoc_dathang'] == 1) {
-            //    $value['hcgoc_dathang'] = '<span class = "label label-success">Đã đặt hàng</span>';
-            //}
-
-            //kiem tra han su dung
-            if($value['hcgoc_expday'] !=''){
-                $exp = $value['hcgoc_expday'];//DateTime::createFromFormat('d/m/Y', $value['hcgoc_expday'])->format('Y-m-d');
-                $diff = (strtotime($exp)-strtotime($now ))/86400 ;
+   
 
 
-                if($diff > 0 ) {
-                    if ($diff >=0 AND $diff <30){
-                        $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-danger"> '.$diff.' ngày</span>';
-                        array_push($this->data['chuangocs'], $value);
-                    }
-                    if ($diff >=30 AND $diff <60){
-                        $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-warning"> '.$diff.' ngày</span>';
-                        array_push($this->data['chuangocs'], $value);
-                    }
-                    if ($diff >=60 AND $diff <90){
-                        $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-primary"> '.$diff.' ngày</span>';
-                        array_push($this->data['chuangocs'], $value);
-                    }
-                    if ($diff >=90 AND $diff <120){
-                        $value['hcgoc_name'] = $value['hcgoc_name'] . ' <span class = "label label-success"> '.$diff.' ngày</span>';
-                        array_push($this->data['chuangocs'], $value);
-                    }
-                    
-                }
-            }
-        }     
-        $this->template->js_add($this->get_key_name, "embed");
-        $this->template->js_add('var csrfName = "'.$this->security->get_csrf_token_name().'";
-                                var csrfHash = "'.$this->security->get_csrf_hash().'";
-                                function ajax_action(id, action) {
-                                    var data ={"id": id, "action": action}; data[csrfName] = csrfHash;
-                                    var agrs = {
-                                        url : "'.base_url().'hoachat/chuangoc/ajax_action", // gửi ajax đến file result.php
-                                        type : "post", // chọn phương thức gửi là post
-                                        dataType:"json", // dữ liệu trả về dạng text
-                                        data : data,
-                                        success : function (result){
-                                            if(result.csrfName){ csrfName = result.csrfName; csrfHash = result.csrfHash;}
-                                            if(result.data == 1 && result.action == "del"){
-                                                $("#data_id_"+id).remove();
-                                                swal({   
-                                                    title: "Đã xóa!",   
-                                                    timer: 2000,   
-                                                    type: "success", 
-                                                });   
-                                            }
-                                            if(result.data == 0 && result.action == "del"){
-                                                swal("Lỗi", result.data, "error"); 
-                                            }
-                                            
-                                            if(result.action == "detail"){
-                                                var re = result.data;
-                                                var tempalte = ""; 
-                                                $.each(re ,function(key, val){
-                                                    if(key != "hcgoc_id" ){
-                                                        if(key != "hcgoc_dathang"){
-                                                            tempalte += "<tr>";
-                                                            tempalte +=      "<td width=\'120\' class=\'font-weight-bold\'>" + get_title(key) + "</td>";
-                                                            tempalte +=      "<td > " + val +"</td>";
-                                                            tempalte += "</tr>";
-                                                        }
-                                                        if(key == "hcgoc_dathang" && (val != null || val != "") ){
-                                                            var datmua;
-                                                            if(val == "1") {
-                                                                datmua = "Đã đặt hàng";
-                                                                tempalte += "<tr>";
-                                                                tempalte +=      "<td width=\'120\' class=\'font-weight-bold\'>" + get_title(key) + "</td>";
-                                                                tempalte +=      "<td > " + datmua +"</td>";
-                                                                tempalte += "</tr>";
-                                                            }
-                                                        }
-                                                        
-                                                    }
-                                                });
-                                                $(".result").html(tempalte);
-                                            }  
-
-                                            if(result.action == "dathang"){
-                                               if(result.data == true){
-                                                    $("#data_id_"+id).remove();
-                                                    swal({   
-                                                        title: "Thành công!",   
-                                                        timer: 1000,   
-                                                        type: "success", 
-                                                    });   
-                                                }
-                                                if(result.data == false){
-                                                    swal({   
-                                                        title: "Lỗi!",   
-                                                        timer: 1000,   
-                                                        type: "error", 
-                                                    });  
-                                                }
-                                            }  
-                                        }
-                                    };
-                                    // Truyền object vào để gọi ajax
-                                    $.ajax(agrs);
-                                }', "embed");
-       
-            if($this->session->flashdata('notify') != NULL){
-                $this->template->js_add("notify('".$this->session->flashdata('notify')['message']."' , '".$this->session->flashdata('notify')['type']."');",'embed');
-            }
-            $this->template->load('index', 'chuangoc/view',$this->data);       
-            unset($temp);
-            unset($source);
-        }else{
-            $this->session->set_flashdata('notify', notify('Không có quyền truy cập','warning'));
-            redirect('hoachat/chuangoc');
-        }
-    }
     /**
     * Tạo mới data cho chuangoc
     *
     */
     public function add() {
         if($this->menu->check_phanquyen("chuangoc_2") ){
-            if ($this->ion_auth->is_admin() OR $this->ion_auth->in_group('management')) {
-                $this->session->set_flashdata('notify', notify('Không có quyền truy cập','warning'));
-                redirect(site_url('chuangoc'));
-            }
-
             $this->data['chuangoc']           = $this->chuangoc_model->add();
             $this->data['action']            = 'hoachat/chuangoc/save';
             $this->template->js_add('assets/vendors/typehead/typeahead.bundle.js', "import");
@@ -450,8 +246,8 @@ public function hc_saphethan() {
     * Sửa data cho chuangoc
     *
     */
-    public function edit($id='', $hc_hethan =FALSE) {
-        if($this->menu->check_phanquyen("chuangoc_3") || $this->menu->check_phanquyen("chuan-sap-het-han_3")){
+    public function edit($id='') {
+        if($this->menu->check_phanquyen("chuangoc_3")){
             $this->template->js_add('assets/vendors/typehead/typeahead.bundle.js', "import");
             $this->template->css_add('assets/vendors/typehead/typehead-addin.css', "link" ); 
             $this->template->js_add('var ten = new Bloodhound({
@@ -499,16 +295,7 @@ public function hc_saphethan() {
             if ($id != ''){
                 $this->data['chuangoc']      = $this->chuangoc_model->get_one($id);
                 $this->data['chuangoc']['hcgoc_donvi']      = $this->chuangoc_model->get_all_donvi();
-                //$this->data['action']       = 'hoachat/chuangoc/save/' . $id;           
-               
-               //kiem tra xem duoc goi tu form nao
-                if ($hc_hethan) {
-                    $this->data['hc_hethan'] = TRUE;
-                    $this->data['action']       = 'hoachat/chuangoc/save/' . $id.'/true/'; 
-                }else{
-                    $this->data['action']       = 'hoachat/chuangoc/save/' . $id;     
-                }
-                    
+                $this->data['action']       = 'hoachat/chuangoc/save/' . $id;           
                 $this->template->load('index', 'chuangoc/form',$this->data);
             } else{
                 $this->session->set_flashdata('notify', notify('Không thấy data','info'));
@@ -524,8 +311,8 @@ public function hc_saphethan() {
     * Cập nhật database  chuangoc
     *
     */
-    public function save($id =NULL, $hc_hethan = FALSE){
-        if($this->menu->check_phanquyen("chuangoc_3") || $this->menu->check_phanquyen("chuan-sap-het-han_3")){
+    public function save($id =NULL){
+        if($this->menu->check_phanquyen("chuangoc_3") ){
             $config = array(
                       
                         array(
@@ -625,11 +412,6 @@ public function hc_saphethan() {
                         if ($this->input->post())  {
                             $this->chuangoc_model->update($id);
                             $this->session->set_flashdata('notify', notify('Update thành công','success'));
-                            if ($hc_hethan) {
-                                redirect('hoachat/chuangoc/hc_saphethan');
-                              }else{
-                                redirect('hoachat/chuangoc');
-                            }
                         }
                     } else{ // If validation incorrect 
                         $this->edit($id,  $hc_hethan);
@@ -661,13 +443,13 @@ public function hc_saphethan() {
                     $this->chuangoc_model->destroy($id);   $output->data = 1;       
                 }
             }
-            if($this->menu->check_phanquyen("chuangoc_1") || $this->menu->check_phanquyen("chuan-sap-het-han_1") || $this->menu->check_phanquyen("chuan-het-han_1")){
+            if($this->menu->check_phanquyen("chuangoc_1")){
                 if ($id>=0 AND $action == "detail") {
                     $output->data = $this->chuangoc_model->get_one($id);     
                 }
             }
 
-            if($this->menu->check_phanquyen("chuangoc_3") || $this->menu->check_phanquyen("chuan-sap-het-han_3")){
+            if($this->menu->check_phanquyen("chuangoc_3")){
                 if ($id != "" AND $action == "dathang") {
                     $st = explode('_', $id);
                     $output->data = $this->chuangoc_model->update_dathang($st[0], $st[1]);       
@@ -687,5 +469,7 @@ public function hc_saphethan() {
         $this->export_excel->create('bvtv_hc_goc', 'hoachat_lang');
         //var_dump($this->create('sys_menu', 'menu'));
     }
+
+    
 }
 ?>

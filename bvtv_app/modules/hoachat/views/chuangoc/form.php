@@ -35,7 +35,9 @@
                 <label  for="hcgoc_vicb_code" class="col-sm-2 control-label"><?php echo lang('hcgoc_vicb_code').' '; ?></label>
                 <div class="col-sm-10">
                     <div class="fg-line">
-                        <?php                  
+                        <?php    
+                        $code = 'VICB4';
+                        //if($chuangoc['hcgoc_vicb_code'] !='') {$code = $chuangoc['hcgoc_vicb_code'] ;}             
                           echo form_input(
                                 array(
                                  'name'         => 'hcgoc_vicb_code',
@@ -44,7 +46,7 @@
                                  'maxlength'=>'45',
                                  'autocomplete' => 'off'
                                  ),
-                                 set_value('hcgoc_vicb_code',$chuangoc['hcgoc_vicb_code'])
+                                 set_value('hcgoc_vicb_code',$code)
                            );             
                         ?>
                          
@@ -305,7 +307,6 @@
                     <small class="help-block c-red"> <?php echo form_error('hcgoc_lab');?> </small>
                 </div>
             </div>
-<?php if(isset($hc_hethan)){ //chi hien ghi chu khi sua (ghi chu cho hoa chat sap het hạn) ?>           
             <div class="form-group">
                 <label  for="hcgoc_dathang" class="col-sm-2 control-label"><?php echo lang('hcgoc_dathang').' '; ?></label>
                 <div class="col-sm-10">
@@ -313,8 +314,10 @@
 
                          <?php   
                               $checked = FALSE;  
-                              if($chuangoc['hcgoc_dathang'] ==1 ){
+                              if(isset($chuangoc['hcgoc_dathang']) AND $chuangoc['hcgoc_dathang'] ==1 ){
                                 $checked = TRUE;
+                              }else{
+                                $checked =FALSE;
                               }
                                echo form_checkbox(
                                         array(
@@ -329,7 +332,6 @@
                     </div>
                 </div>
             </div>
-<?php } ?>          
  
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-10 col-xs-offset-5 col-xs-10">
