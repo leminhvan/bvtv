@@ -4,17 +4,6 @@
  *
  * @author MinhVan
  */
-
-function notify($msg,$type = 'info',$judul = '') 
-{
-    
-    $tpl = array();
-    $tpl['type']  = $type;
-    $tpl['message'] = $msg;
-        
-    return $tpl;
-}
-
 function kq_phantram($mc, $vc, $pc, $sc, $mm, $vm, $sm){
 	if($mm != 0 && $sm != 0 && $vc != 0 ){
 		return ($mc * $pc * $sm * $vm) / ($mm * $sc * $vc);

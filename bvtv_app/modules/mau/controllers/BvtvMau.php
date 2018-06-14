@@ -14,7 +14,7 @@ class BvtvMau extends CI_Controller{
         $this->load->model('bvtvmau_model');
         $this->load->library(array('form_validation'));
          $this->load->library('counter_visitor_online');
-        $this->load->helper(array('form', 'url','notify_helper'));
+        $this->load->helper(array('form', 'url','notify_helper', 'bvtvFunctions'));
         $this->lang->load('bvtvmau');
         if (!$this->ion_auth->logged_in() OR !$this->ion_auth->is_admin()) {
             redirect('login');
@@ -453,55 +453,28 @@ class BvtvMau extends CI_Controller{
             $this->data['bvtv_ketqua']           = $this->bvtvmau_model->add_ketqua();
             $this->data['action']            = 'mau/bvtvmau/save_ketqua';
             $this->data['mau_id']			= $id;
-            $this->template->js_add('assets/vendors/typehead/typeahead.bundle.js', "import");
-            $this->template->css_add('assets/vendors/typehead/typehead-addin.css', "link" ); 
-            $this->template->js_add('var ten = new Bloodhound({
-                                                      datumTokenizer: Bloodhound.tokenizers.whitespace,
-                                                      queryTokenizer: Bloodhound.tokenizers.whitespace,
-                                                      local: []
-                                                    });
-                                    ten.initialize();
-                                    function ajax_action(key, action) {
-                                        var data ={"key": key, "action": action};  console.log(key);
+ 
+            $this->template->js_add('$(".tinh_kq").on("keyup", function(){
+            							var sc1 = $("#s_chuan1").val();
+            							var sc2 = $("#s_chuan2").val();
+            							var sc = (sc1 + sc2)/2;
+            							var mm = $("#m_mau").val();
+            							var vm = $("#v_mau").val();
+            							var sm = $("#s_mau").val();
+            							var data ={"sc": sc, "mm":mm, "vm":vm, "sm":sm, "action": "ketqua"}; 
                                         var agrs = {
-                                            url : "ajax_action", // gửi ajax đến file result.php
-                                            type : "get", // chọn phương thức gửi là post
-                                            dataType:"json", // dữ liệu trả về dạng text
+                                            url : "'.base_url('mau/bvtvmau').'/ajax_action",
+                                            type : "get",
+                                            dataType:"json",
                                             data : data,
                                             success : function (result){
-                                                if(result.action == "autoten"){ ///Doi thanh chon chuan
-                                                    ten.local = result.data;
-                                                    ten.initialize(true);
-                                                }  
-
                                                 if(result.action == "ketqua"){ ///Doi thanh chon chuan
-                                                    console.log(result);
+                                                    console.log(result.data);
                                                 }
                                             }
                                         };
                                         // Truyền object vào để gọi ajax
                                         $.ajax(agrs);
-
-                                        
-
-                                    }', "embed");
-            $this->template->js_add('$(".autoten").on( "click", function(){
-                                            ajax_action("", "autoten");
-                                        });
-                                    $(".autoten").typeahead({
-                                      hint: true,
-                                      highlight: true,
-                                      minLength: 1
-                                    },
-                                    {
-                                      name: "ten",
-                                      source: ten
-                                    });
-                                        ', "embed"); 
-            $this->template->js_add('$(".tinh_kq").on("keyup", function(){
-            							var sc = 10, mm = 100, vm = 10, sm = 10;
-            							var data = [{"sc":sc}, {"mm":mm}, {"vm":vm	}, {"sm":sm}, ]
-            							ajax_action(data, "ketqua");
             						});', 'embed');
 
             $this->template->load('index', 'ketqua/form',$this->data);
@@ -584,7 +557,7 @@ class BvtvMau extends CI_Controller{
     }
 
     public function ajax_action(){   
-        $id = strip_tags($this->input->post('id', TRUE));
+        $id = strip_tags($this->input->post('id', TRUE)) ? strip_tags($this->input->post('id', TRUE)) : 0;
         $action = strip_tags($this->input->post('action', TRUE)) ? strip_tags($this->input->post('action', TRUE)) : strip_tags($this->input->get('action', TRUE));
         $output = new stdClass;
         $output->csrfName = $this->security->get_csrf_token_name();
@@ -610,13 +583,12 @@ class BvtvMau extends CI_Controller{
         	if($action == 'ketqua'){
         		//$temp1 =  strip_tags($this->input->get('chuan_id', TRUE));
         		//$chuan = $this->bvtvmau_model->get_chuan_info($temp1);
-        		$mc = 10.25; $vc = 10; $pc = 98.2;
-        		$data = strip_tags($this->input->get('key', TRUE));
-        		//$sc = strip_tags($this->input->get('sc', TRUE));
-        		//$mm = strip_tags($this->input->get('mm', TRUE));
-        		//$vm = strip_tags($this->input->get('vm', TRUE));
-        		//$sm = strip_tags($this->input->get('sm', TRUE));
-        		$output->data = $data; //kq_phantram($mc, $vc, $pc, $sc, $mm, $vm, $sm);
+        		$mc = 10; $vc = 10; $pc = 100;
+        		$sc = strip_tags($this->input->get('sc', TRUE));
+        		$mm = strip_tags($this->input->get('mm', TRUE));
+        		$vm = strip_tags($this->input->get('vm', TRUE));
+        		$sm = strip_tags($this->input->get('sm', TRUE));
+        		$output->data = kq_phantram($mc, $vc, $pc, $sc, $mm, $vm, $sm);
         	}
 
         }
