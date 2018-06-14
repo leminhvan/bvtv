@@ -5,7 +5,7 @@
  * Copyright {year}
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-	$lang['head_title_bvtv_mau']    = 'Mấu';
+	$lang['head_title_bvtvmau']    = 'Mấu';
 	$lang['mau_chitieu']    = 'Chỉ tiêu'; 
 	$lang['mau_code']    = 'Mã mẫu'; 
 	$lang['mau_ngaynhan']    = 'Ngày nhận'; 
