@@ -2,10 +2,10 @@
 -- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 13, 2018 at 07:29 AM
--- Server version: 5.7.21
--- PHP Version: 5.6.33
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th6 14, 2018 lúc 08:16 AM
+-- Phiên bản máy phục vụ: 5.7.21
+-- Phiên bản PHP: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `admin`
+-- Cơ sở dữ liệu: `admin`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_preferences`
+-- Cấu trúc bảng cho bảng `admin_preferences`
 --
 
 CREATE TABLE `admin_preferences` (
@@ -41,7 +41,7 @@ CREATE TABLE `admin_preferences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `admin_preferences`
+-- Đang đổ dữ liệu cho bảng `admin_preferences`
 --
 
 INSERT INTO `admin_preferences` (`id`, `user_panel`, `sidebar_form`, `messages_menu`, `notifications_menu`, `tasks_menu`, `user_menu`, `ctrl_sidebar`, `transition_page`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `admin_preferences` (`id`, `user_panel`, `sidebar_form`, `messages_m
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bvtv_dangnenmau`
+-- Cấu trúc bảng cho bảng `bvtv_dangnenmau`
 --
 
 CREATE TABLE `bvtv_dangnenmau` (
@@ -60,7 +60,7 @@ CREATE TABLE `bvtv_dangnenmau` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bvtv_dangnenmau`
+-- Đang đổ dữ liệu cho bảng `bvtv_dangnenmau`
 --
 
 INSERT INTO `bvtv_dangnenmau` (`nenmau_id`, `kyhieu`, `mota`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `bvtv_dangnenmau` (`nenmau_id`, `kyhieu`, `mota`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bvtv_donvi`
+-- Cấu trúc bảng cho bảng `bvtv_donvi`
 --
 
 CREATE TABLE `bvtv_donvi` (
@@ -80,21 +80,21 @@ CREATE TABLE `bvtv_donvi` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bvtv_donvi`
+-- Đang đổ dữ liệu cho bảng `bvtv_donvi`
 --
 
 INSERT INTO `bvtv_donvi` (`donvi_id`, `donvi_kyhieu`, `donvi_mota`) VALUES
-(3, 'l', 'lit'),
-(2, 'mg', 'miligram'),
-(8, 'g', 'gram'),
-(5, 'kg', 'kilogram'),
 (1, 'g', 'gram'),
-(9, 'ml', 'mililit');
+(2, 'mg', 'miligram'),
+(3, 'l', 'lit'),
+(4, 'ml', 'mililit'),
+(5, 'kg', 'kilogram'),
+(6, '&micro;g', 'microgram');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bvtv_hc_goc`
+-- Cấu trúc bảng cho bảng `bvtv_hc_goc`
 --
 
 CREATE TABLE `bvtv_hc_goc` (
@@ -115,7 +115,7 @@ CREATE TABLE `bvtv_hc_goc` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `bvtv_hc_goc`
+-- Đang đổ dữ liệu cho bảng `bvtv_hc_goc`
 --
 
 INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_nhasx`, `hcgoc_code`, `hcgoc_lot`, `hcgoc_hamluong`, `hcgoc_luongnhap`, `hcgoc_expday`, `hcgoc_ngaynhap`, `hcgoc_nguoinhap`, `hcgoc_baoquan`, `hcgoc_dathang`, `hcgoc_lab`) VALUES
@@ -131,8 +131,8 @@ INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_n
 (10, 'Flumethrin', 'StSi17300', 'Sigma', '46417-100MG', 'SZBE118XV', '95.7', '100_mg', '28-04-2019', '10-10-2014', 'admin', 'RT', NULL, ''),
 (11, 'Lindane', 'StSi17400', 'Sigma', '45548-250MG', 'SZBB321XV', '99.8', '250_mg', '17-11-2016', '10-10-2014', 'admin', 'RT', NULL, ''),
 (12, 'Chlorpyriphos', 'StSi17500', 'Sigma', '45395-250MG', 'SZBD343XV', '99.7', '250_mg', '09-12-2018', '10-10-2014', 'admin', '2-8', NULL, ''),
-(13, 'Coumaphos', 'StSi17600', 'Sigma', '45403-250MG', 'SZBD157XV', '99.8', '250_mg', '06-06-2018', '10-10-2014', 'admin', '2-8', '0', '2'),
-(14, 'Edifenphos', 'StSi17700', 'Sigma', '45467-250MG', 'SZBD147XV', '99.7', '250_mg', '27-05-2018', '10-10-2014', 'admin', '2-8', '0', ''),
+(13, 'Coumaphos', 'StSi17600', 'Sigma', '45403-250MG', 'SZBD157XV', '99.8', '250_mg', '06-06-2018', '10-10-2014', 'admin', '2-8', '', '2'),
+(14, 'Edifenphos', 'StSi17700', 'Sigma', '45467-250MG', 'SZBD147XV', '99.7', '250_mg', '27-05-2018', '10-10-2014', 'admin', '2-8', NULL, ''),
 (15, 'Buffer solution pH 10', 'StAm18100', 'Hanna - Mỹ', '', '', '', '500_ml', '', '', 'admin', '25±5', NULL, ''),
 (16, 'Diazinon', 'StSi18300', 'Sigma', '45428-250MG', 'SZBC067XV', '98.5', '250_mg', '07-03-2017', '10-11-2014', 'admin', '2-8', NULL, ''),
 (17, 'Mancozeb', 'StSi18500', 'Sigma', '45553-250MG', 'SZBA195XV', '96.4', '250_mg', '14-07-2015', '10-11-2014', 'admin', 'RT', NULL, ''),
@@ -145,7 +145,7 @@ INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_n
 (24, 'Fipronil', 'StSi19200', 'Sigma', '46451-100MG', 'SZBD228XV', '97.9', '100_mg', '16-08-2017', '25-11-2014', 'admin', '25±5', NULL, ''),
 (25, 'Emamectin benzoate', 'StSi19300', 'Sigma', '31733-250MG', 'SZB9170XV', '99.4', '250_mg', '19-06-2016', '25-11-2014', 'admin', '25±5', NULL, ''),
 (26, 'Carbaryl', 'StSi19600', 'Sigma', '32055-250MG', 'SZBB224XV', '99.8', '250_mg', '10-08-2016', '25-11-2014', 'admin', '25±5', NULL, ''),
-(27, 'Carbaryl', 'StSi19600', 'Sigma', '32055-250MG', 'SZBB219XV', '99.8', '250_mg', '07-08-2018', '28-01-2015', 'admin', '25±5', '0', ''),
+(27, 'Carbaryl', 'StSi19600', 'Sigma', '32055-250MG', 'SZBB219XV', '99.8', '250_mg', '07-08-2018', '28-01-2015', 'admin', '25±5', '1', ''),
 (28, 'Acetamiprid', 'StSi19700', 'Sigma', '33674-100MG-R', 'SZBC110XV', '99.9', '100_mg', '19-04-2017', '25-11-2014', 'admin', '25±5', NULL, ''),
 (29, 'Permethrin', 'StSi19800', 'Sigma', '45614-250MG', 'SZBD142XV', '98.1', '250_mg', '22-05-2018', '25-11-2014', 'admin', '25±5', NULL, ''),
 (30, 'Fenitrothion', 'StSi20100', 'Sigma', '45487', 'SZBD022XV', '95.8', '250_mg', '22-01-2018', '25-11-2014', 'admin', '2-8', NULL, ''),
@@ -156,13 +156,14 @@ INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_n
 (35, 'Zineb', 'StSi20400', 'Sigma', '45707', 'SZBD330XV', '98', '250_mg', '26-11-2018', '25-11-2014', 'admin', '2-8', NULL, ''),
 (36, 'Fenpropathrin', 'StSu20500', 'Chemservice', 'N-11960-250MG', '1825800', '99.4', '250_mg', '31-03-2018', '25-11-2014', 'admin', '25±5', NULL, ''),
 (37, 'Hexaconazol', 'StSi20600', 'Sigma', '34348', 'SZBC313XV', '99.3', '250_mg', '08-11-2017', '25-11-2014', 'admin', '25±5', NULL, ''),
-(39, 'Glyphosate', 'StSi20800', 'Sigma', '45521', 'SZBD267XV', '99.7', '250_mg', '24-09-2018', '25-11-2014', 'admin', '25±5', '0', ''),
+(38, '2,4-D', 'StSi20700', 'Sigma', '31518', 'SZBD352XV', '99.9', '250_mg', '18-12-2018', '25-11-2014', 'admin', '25±5', '', ''),
+(39, 'Glyphosate', 'StSi20800', 'Sigma', '45521', 'SZBD267XV', '99.7', '250_mg', '24-09-2018', '25-11-2014', 'admin', '25±5', NULL, ''),
 (40, 'Pyridaben', 'StSi20900', 'Sigma', '46047', 'SZBD123XV', '99.6', '25_mg', '03-05-2018', '25-11-2014', 'admin', '25±5', NULL, ''),
 (41, 'Tetramethrin', 'StSi21000', 'Sigma', '45681', 'SZBD123XV', '98.3', '250_mg', '03-05-2018', '25-11-2014', 'admin', '25±5', '', ''),
 (42, 'Fenvalerate', 'StSi21100', 'Sigma', '45495', 'SZBE065XV', '99.5', '250_mg', '06-03-2019', '25-11-2014', 'admin', '25±5', NULL, ''),
 (43, 'Myclobutanil', 'StSi21200', 'Sigma', '34360', 'SZBD038XV', '99.4', '100_mg', '07-02-2014', '25-11-2014', 'admin', '25±5', NULL, ''),
 (44, 'Tricyclazol', 'StSi21300', 'Sigma', '45808', 'SZBD077XV', '99.7', '10_mg', '18-03-2018', '25-11-2014', 'admin', '25±5', NULL, ''),
-(45, 'Chlorothalonil', 'StSi21400', 'Sigma', '36791', 'SZBD232XV', '99.3', '250_mg', '20-08-2018', '25-11-2014', 'admin', '25±5', NULL, ''),
+(45, 'Chlorothalonil', 'StSi21400', 'Sigma', '36791', 'SZBD232XV', '99.3', '250_mg', '20-08-2018', '25-11-2014', 'admin', '25±5', '0', ''),
 (46, 'Trifluralin', 'StSi21500', 'Sigma', '32061', 'SZBD106XV', '99.1', '250_mg', '16-04-2018', '25-11-2014', 'admin', '25±5', '', ''),
 (47, 'Flusilazole', 'StSi21600', 'Sigma', '45753', 'SZBC320XV', '99.8', '100_mg', '15-11-2017', '25-11-2014', 'admin', '25±5', NULL, ''),
 (48, 'Tebuconazole', 'StSi21700', 'Sigma', '32013', 'SZBE029XV', '99.3', '250_mg', '29-01-2019', '25-11-2014', 'admin', '25±5', NULL, ''),
@@ -194,10 +195,10 @@ INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_n
 (74, 'Dimethoate', 'StSu28100', 'Supelco', 'N-11758-250MG', '2965600', '99.4', '250_mg', '01-07-2017', '30-05-2015', 'admin', 'RT', NULL, ''),
 (75, 'Mesotrione', 'StSi28200', 'Sigma', '33855-100MG', 'SZBD087XV', '99.9', '100_mg', '28-03-2017', '30-05-2015', 'admin', '25±5', NULL, ''),
 (76, 'Thiophanate-methyl', 'StSi28700', 'Sigma', '45688-250MG', 'SZBC220XV', '99.3', '100_ml', '07-08-2017', '25-06-2015', 'admin', '25±5', NULL, ''),
-(77, 'Alachlor', 'StSi28800', 'Sigma', '45316-250MG', 'SZBD163XV', '99.8', '250_mg', '12-06-2018', '02-07-2015', 'admin', '25±5', '', ''),
+(77, 'Alachlor', 'StSi28800', 'Sigma', '45316-250MG', 'SZBD163XV', '99.8', '250_mg', '12-06-2018', '02-07-2015', 'admin', '25±5', '1', ''),
 (78, 'Clomazone', 'StSi28900', 'Sigma', '4612-1MG', 'SZBC306XV', '99.7', '100_ml', '01-11-2017', '02-07-2015', 'admin', '25±5', NULL, ''),
 (79, 'Deltamethrin', 'StSi29000', 'Sigma', '45423-250MG', 'SZBC059XV', '99.6', '250_mg', '28-02-2017', '02-07-2015', 'admin', '25±5', NULL, ''),
-(80, 'Ethoprophos', 'StSi29100', 'Sigma', '45306-100MG', 'SZBD182XV', '93.4', '100_mg', '01-07-2018', '02-07-2015', 'admin', '2-8', '0', ''),
+(80, 'Ethoprophos', 'StSi29100', 'Sigma', '45306-100MG', 'SZBD182XV', '93.4', '100_mg', '01-07-2018', '02-07-2015', 'admin', '2-8', NULL, ''),
 (81, 'Fenoxanil', 'StSi29200', 'Sigma', '33872-100MG', 'SZBA305XV', '99.1', '100_mg', '01-11-2015', '02-07-2015', 'admin', '25±5', NULL, ''),
 (82, 'Pretilachlor', 'StSi29300', 'Sigma', '31251-250MG', 'SZBD085XV', '98.7', '250_mg', '26-03-2018', '02-07-2015', 'admin', '25±5', NULL, ''),
 (83, 'S-metolachlor', 'StSi29400', 'Sigma', '33859-100MG-R', 'SZBD352XV', '98.2', '100_mg', '18-12-2018', '02-07-2015', 'admin', '25±5', NULL, ''),
@@ -294,7 +295,7 @@ INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_n
 (174, 'Norfloxacin', 'StSi18400', 'Sigma', '33899-100MG-R', 'SZBD099XV', '99.8', '100_mg', '09-04-2018', '10-11-2014', 'admin', '2-8', NULL, ''),
 (175, 'Aldicarb', 'StSi24500', 'Sigma', '33386-250MG', 'SZBC235XV', '99.9', '250_mg', '22-08-2017', '28-01-2015', 'admin', 'RT', NULL, ''),
 (176, 'Quintozen', 'StSi24800', 'Sigma', '45653-250MG', 'SZBC313XV', '99.7', '250_mg', '08-11-2017', '28-01-2015', 'admin', 'RT', NULL, ''),
-(177, 'Sulfaquinoxaline', 'StSi19500', 'Sigma', '45662-250MG', 'SZBD227XV', '98.8', '250_mg', '15-08-2018', '10-11-2014', 'admin', '25±5', '0', ''),
+(177, 'Sulfaquinoxaline', 'StSi19500', 'Sigma', '45662-250MG', 'SZBD227XV', '98.8', '250_mg', '15-08-2018', '10-11-2014', 'admin', '25±5', NULL, ''),
 (178, 'Pirimicarb', 'StSi17100', 'Sigma', '45627-250MG', 'SZBD058XV', '98.7', '250_mg', '27-02-2018', '10-10-2014', 'admin', 'RT', '', ''),
 (179, 'Propoxur', 'StSi24700', 'Sigma', '45644-250MG', 'SZBD302XV', '99.9', '250_mg', '29-10-2018', '28-01-2015', 'admin', 'RT', NULL, ''),
 (180, 'Aldicarb - sulfone', 'StSi24400', 'Sigma', '33387-100MG', 'SZBC313XV', '97.6', '100_mg', '08-11-2017', '28-01-2015', 'admin', 'RT', NULL, ''),
@@ -339,7 +340,7 @@ INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_n
 (219, 'Sodium 2.4-nitrophenolate', 'StMS64600', 'Matrix', 'O97103', 'S20N', '95', '1_g', '', '18-09-2017', 'admin', 'RT', NULL, ''),
 (220, 'Quinalphos', 'StDr64700', 'Dr.Ehrenstorfer', 'C16700000', 'G131422', '99.4', '0.25_g', '13-03-2021', '18-09-2017', 'admin', '-18±4', NULL, ''),
 (221, 'Thiobencarb', 'StDr64800', 'Dr.Ehrenstorfer', 'C17470000', 'G150057', '98.17', '0.25_g', '17-08-2021', '18-09-2017', 'admin', '4±4', NULL, ''),
-(222, 'Pyraclostrobin', 'StSu64900', 'Chemservice', 'N-13143-100MG', '6491300', '99.5', '100_mg', '30-06-2018', '18-09-2017', 'admin', 'RT', '1', ''),
+(222, 'Pyraclostrobin', 'StSu64900', 'Chemservice', 'N-13143-100MG', '6491300', '99.5', '100_mg', '30-06-2018', '18-09-2017', 'admin', 'RT', NULL, ''),
 (223, 'Carbosulfan', 'StSu66500', 'Chemservice', 'N-11409-250MG', '6450200', '97.5', '250_mg', '31-03-2021', '18-09-2017', 'admin', 'RT', NULL, ''),
 (224, 'Rotenone', 'StSu66600', 'Chemservice', 'N-13184-250MG', '5983200', '96.8', '250_mg', '30-09-2019', '18-09-2017', 'admin', 'RT', NULL, ''),
 (225, 'Pyribenzoxim', 'StSu66700', 'Dr.Ehrenstorfer', 'C16624000', 'G149059', '98.6', '100_mg', '05-09-2020', '04-10-2017', 'admin', '20±4', NULL, ''),
@@ -349,12 +350,14 @@ INSERT INTO `bvtv_hc_goc` (`hcgoc_id`, `hcgoc_name`, `hcgoc_vicb_code`, `hcgoc_n
 (229, 'PHENOTHRIN', 'StDr80200', 'Dr.Ehrenstorfer', 'DRE-C16040000', 'G143911', '96,8%', '100_mg', '22-08-2023', '07-05-2018', 'Ngân', '4±4', '0', ''),
 (230, 'Propanil', 'StDr81000', 'Dr.Ehrenstorfer', '16410000', '40316', '99.0%', '250_mg', '25-03-2020', '07-05-2018', 'Ngân', '20±4', '0', ''),
 (231, 'Tetramethrin', 'StDr80800', 'Dr.Ehrenstorfer', '17410000', '130072', '98,0 %', '100_mg', '29-07-2019', '08-05-2018', 'Ngân', '20±4', '0', ''),
-(232, 'Cypermethrin', 'StDr81100', 'Dr.Ehrenstorfer', 'DRE-C11890000', 'G167245', '97,39 %', '100_mg', '31-01-2024', '07-05-2018', 'Ngân', '20±4', '0', '');
+(232, 'Cypermethrin', 'StDr81100', 'Dr.Ehrenstorfer', 'DRE-C11890000', 'G167245', '97,39 %', '100_mg', '31-01-2024', '07-05-2018', 'Ngân', '20±4', '0', ''),
+(233, 'Carbaryl', 'StSi19600', 'Sigma', '32055-250MG', 'SZBB224XV', '', '250_mg', '10-08-2016', '25-11-2014', 'Admin', '25±5', NULL, '2'),
+(235, 'Carbendazim', 'StDr16300', 'Dr.Ehrenstorfer', '10990000', '30108', '99.0', '250_mg', '01-04-2019', '11-09-2014', 'Admin', '20±4', NULL, '2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bvtv_ketqua`
+-- Cấu trúc bảng cho bảng `bvtv_ketqua`
 --
 
 CREATE TABLE `bvtv_ketqua` (
@@ -372,7 +375,7 @@ CREATE TABLE `bvtv_ketqua` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bvtv_ketqua`
+-- Đang đổ dữ liệu cho bảng `bvtv_ketqua`
 --
 
 INSERT INTO `bvtv_ketqua` (`ketqua_id`, `mau_id`, `chuan_id`, `s_chuan1`, `s_chuan2`, `m_mau`, `v_mau`, `s_mau`, `hl_dk`, `ngay_tao`, `kq_phantram`) VALUES
@@ -382,7 +385,7 @@ INSERT INTO `bvtv_ketqua` (`ketqua_id`, `mau_id`, `chuan_id`, `s_chuan1`, `s_chu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bvtv_mau`
+-- Cấu trúc bảng cho bảng `bvtv_mau`
 --
 
 CREATE TABLE `bvtv_mau` (
@@ -400,18 +403,18 @@ CREATE TABLE `bvtv_mau` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bvtv_mau`
+-- Đang đổ dữ liệu cho bảng `bvtv_mau`
 --
 
 INSERT INTO `bvtv_mau` (`mau_id`, `mau_chitieu`, `mau_code`, `mau_ngaynhan`, `mau_ngaytra`, `mau_trangthai`, `mau_ketqua`, `mau_donvi`, `mau_dang`, `mau_luutru`, `mau_note`) VALUES
-(1, 'Azoxystrobin', 'VICB41800112', '06-06-2018', '14-06-2018', 0, '4', '%', 1, '54', ''),
+(1, 'Azoxystrobin', 'VICB41800112', '06-06-2018', '14-06-2018', 2, '4', '%', 1, '54', ''),
 (2, 'Acetamiprid', 'VICB41801111', '09-06-2018', '22-06-2018', 0, '3', '%', 2, '0', ''),
 (3, 'Zineb', 'VICB41801111', '09-06-2018', '22-06-2018', 0, '', '%', 1, NULL, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bvtv_tailieu_thamkhao`
+-- Cấu trúc bảng cho bảng `bvtv_tailieu_thamkhao`
 --
 
 CREATE TABLE `bvtv_tailieu_thamkhao` (
@@ -424,13 +427,13 @@ CREATE TABLE `bvtv_tailieu_thamkhao` (
   `tk_hoaly` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tk_hoatchat` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tk_link` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `tk_create` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tk_create` date DEFAULT NULL,
   `tk_user` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tk_note` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bvtv_tailieu_thamkhao`
+-- Đang đổ dữ liệu cho bảng `bvtv_tailieu_thamkhao`
 --
 
 INSERT INTO `bvtv_tailieu_thamkhao` (`tk_id`, `tk_code`, `tk_name`, `tk_sop`, `tk_chidinh`, `tk_phuongphap`, `tk_hoaly`, `tk_hoatchat`, `tk_link`, `tk_create`, `tk_user`, `tk_note`) VALUES
@@ -624,13 +627,12 @@ INSERT INTO `bvtv_tailieu_thamkhao` (`tk_id`, `tk_code`, `tk_name`, `tk_sop`, `t
 (188, '', 'Analysis of 50% Acetochlor and Clomazone EC by HPLC', '', 0, '', '', 'Clomazone', '-Clomazone', '2018-02-08', 'admin', ''),
 (189, '', 'Dissipation kinetics of kresoxim-methyl fungicide in different pH waters under sun light', '', 0, '', '', 'Kresoxim_methyl', '-Kresoxim-methyl', '2018-02-08', 'admin', ''),
 (190, '', 'Estimation of etofenprox residues in tomato fruits by Quechers methodlogy and HPLC-DAD', '', 0, '', '', 'Etofenprox', '-Etofenprox', '2018-02-08', 'admin', ''),
-(191, '', 'Warfarin Sodium Related Substance HPLC Analysis (HP-EUR) on Luna 5u CN 150 x 4.6mm ID', '', 0, '', '', 'Warfarin', '-Warfarin', '2018-02-08', 'admin', ''),
-(192, 'test1', 'test', 'a', 0, 'a', 'a', 'a', 'test.pdf', '29-05-2018', '', '');
+(191, '', 'Warfarin Sodium Related Substance HPLC Analysis (HP-EUR) on Luna 5u CN 150 x 4.6mm ID', '', 0, '', '', 'Warfarin', '-Warfarin', '2018-02-08', 'admin', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groups`
+-- Cấu trúc bảng cho bảng `groups`
 --
 
 CREATE TABLE `groups` (
@@ -638,20 +640,20 @@ CREATE TABLE `groups` (
   `name` varchar(20) NOT NULL,
   `description` varchar(100) NOT NULL,
   `bgcolor` varchar(10) DEFAULT '#607D8B 	'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `groups`
+-- Đang đổ dữ liệu cho bảng `groups`
 --
 
 INSERT INTO `groups` (`id`, `name`, `description`, `bgcolor`) VALUES
-(1, 'admin', 'Admin', '#e91e63'),
-(2, 'user', 'General User', '#009688');
+(1, 'admin', 'Quản trị hệ thống', '#f44336'),
+(2, 'management', 'Quản lý hệ thống', '#009688');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_attempts`
+-- Cấu trúc bảng cho bảng `login_attempts`
 --
 
 CREATE TABLE `login_attempts` (
@@ -659,148 +661,45 @@ CREATE TABLE `login_attempts` (
   `ip_address` varchar(15) NOT NULL,
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_counter`
+-- Cấu trúc bảng cho bảng `sys_counter`
 --
 
 CREATE TABLE `sys_counter` (
   `counter_id` int(11) NOT NULL,
   `count` int(11) DEFAULT NULL,
   `timer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `sys_counter`
+-- Đang đổ dữ liệu cho bảng `sys_counter`
 --
 
 INSERT INTO `sys_counter` (`counter_id`, `count`, `timer`) VALUES
-(1, 126, '2018-03-01 04:37:33'),
-(2, 10, '2018-03-01 04:38:03'),
-(3, 11, '2018-04-26 13:42:01'),
-(4, 12, '2018-04-26 14:34:48'),
-(5, 13, '2018-04-26 15:31:00'),
-(6, 14, '2018-04-26 15:32:28'),
-(7, 15, '2018-04-26 15:34:49'),
-(8, 16, '2018-04-26 15:36:06'),
-(9, 17, '2018-04-26 15:39:09'),
-(10, 18, '2018-04-26 15:42:25'),
-(11, 19, '2018-04-28 15:32:20'),
-(12, 20, '2018-04-29 12:58:56'),
-(13, 21, '2018-04-29 13:37:14'),
-(14, 22, '2018-04-29 15:12:37'),
-(15, 23, '2018-04-29 15:15:01'),
-(16, 24, '2018-04-29 15:15:52'),
-(17, 25, '2018-04-29 15:19:29'),
-(18, 26, '2018-04-29 15:29:22'),
-(19, 27, '2018-04-29 15:32:16'),
-(20, 28, '2018-05-03 14:18:20'),
-(21, 29, '2018-05-03 14:44:00'),
-(22, 30, '2018-05-03 14:46:34'),
-(23, 31, '2018-05-03 15:03:34'),
-(24, 32, '2018-05-03 15:05:57'),
-(25, 33, '2018-05-03 15:07:13'),
-(26, 34, '2018-05-03 15:37:40'),
-(27, 35, '2018-05-03 15:53:44'),
-(28, 36, '2018-05-03 15:57:49'),
-(29, 37, '2018-05-03 16:08:37'),
-(30, 38, '2018-05-03 16:12:08'),
-(31, 39, '2018-05-03 16:30:44'),
-(32, 40, '2018-05-19 03:08:54'),
-(33, 41, '2018-05-19 10:37:51'),
-(34, 42, '2018-05-19 10:39:53'),
-(35, 43, '2018-05-20 00:24:36'),
-(36, 44, '2018-05-20 04:54:57'),
-(37, 45, '2018-05-20 04:55:35'),
-(38, 46, '2018-05-21 01:22:03'),
-(39, 47, '2018-05-21 01:23:03'),
-(40, 48, '2018-05-21 01:23:37'),
-(41, 49, '2018-05-21 01:24:12'),
-(42, 50, '2018-05-21 02:01:17'),
-(43, 51, '2018-05-21 02:45:05'),
-(44, 52, '2018-05-21 02:47:09'),
-(45, 53, '2018-05-21 02:50:26'),
-(46, 54, '2018-05-21 02:52:13'),
-(47, 55, '2018-05-21 03:00:58'),
-(48, 56, '2018-05-21 03:04:59'),
-(49, 57, '2018-05-21 03:12:10'),
-(50, 58, '2018-05-21 03:15:23'),
-(51, 59, '2018-05-21 03:21:18'),
-(52, 60, '2018-05-21 03:28:38'),
-(53, 61, '2018-05-21 05:49:29'),
-(54, 62, '2018-05-21 06:14:44'),
-(55, 63, '2018-05-21 07:10:20'),
-(56, 64, '2018-05-21 07:14:24'),
-(57, 65, '2018-05-21 08:59:30'),
-(58, 66, '2018-05-22 01:45:59'),
-(64, 67, '2018-05-22 04:08:15'),
-(65, 68, '2018-05-22 07:51:18'),
-(66, 69, '2018-05-23 03:03:21'),
-(67, 70, '2018-05-23 03:27:10'),
-(68, 71, '2018-05-23 03:28:36'),
-(69, 72, '2018-05-23 03:33:23'),
-(70, 73, '2018-05-23 03:33:56'),
-(71, 74, '2018-05-23 03:39:13'),
-(72, 75, '2018-05-23 03:39:27'),
-(73, 76, '2018-05-23 03:51:49'),
-(74, 77, '2018-05-23 04:17:36'),
-(75, 78, '2018-05-23 06:08:08'),
-(76, 79, '2018-05-23 08:17:28'),
-(77, 80, '2018-05-24 01:22:04'),
-(78, 81, '2018-05-25 01:34:31'),
-(79, 82, '2018-05-25 06:20:38'),
-(80, 83, '2018-05-26 01:05:31'),
-(81, 84, '2018-05-26 02:20:15'),
-(82, 85, '2018-05-26 04:42:57'),
-(83, 86, '2018-05-26 04:43:24'),
-(84, 87, '2018-05-26 04:44:28'),
-(85, 88, '2018-05-26 05:52:39'),
-(86, 89, '2018-05-26 06:57:43'),
-(87, 90, '2018-05-28 01:19:12'),
-(88, 91, '2018-05-28 02:08:36'),
-(89, 92, '2018-05-28 04:03:47'),
-(90, 93, '2018-05-28 04:27:51'),
-(91, 94, '2018-05-28 06:11:09'),
-(92, 95, '2018-05-28 07:09:05'),
-(93, 96, '2018-05-28 07:52:48'),
-(94, 97, '2018-05-28 08:49:21'),
-(95, 98, '2018-05-28 13:37:48'),
-(96, 99, '2018-05-28 13:56:09'),
-(97, 100, '2018-05-28 14:18:10'),
-(98, 101, '2018-05-29 01:36:27'),
-(99, 102, '2018-05-29 06:03:18'),
-(100, 103, '2018-05-29 07:37:25'),
-(101, 104, '2018-05-29 08:27:00'),
-(102, 105, '2018-06-05 16:29:35'),
-(103, 106, '2018-06-06 01:08:12'),
-(104, 107, '2018-06-06 01:14:37'),
-(105, 108, '2018-06-06 02:49:06'),
-(106, 109, '2018-06-06 05:13:09'),
-(107, 110, '2018-06-06 07:47:59'),
-(108, 111, '2018-06-06 08:34:00'),
-(109, 112, '2018-06-06 12:28:05'),
-(110, 113, '2018-06-07 01:20:48'),
-(111, 114, '2018-06-07 04:28:17'),
-(112, 115, '2018-06-07 06:01:37'),
-(113, 116, '2018-06-07 15:59:47'),
-(114, 117, '2018-06-08 01:12:25'),
-(115, 118, '2018-06-08 04:33:17'),
-(116, 119, '2018-06-09 01:49:38'),
-(117, 120, '2018-06-09 08:57:31'),
-(118, 121, '2018-06-09 11:54:27'),
-(119, 122, '2018-06-12 01:10:05'),
-(120, 123, '2018-06-12 01:55:19'),
-(121, 124, '2018-06-12 05:07:07'),
-(122, 125, '2018-06-12 07:19:16'),
-(123, 126, '2018-06-12 09:15:09');
+(1, 105, '2018-06-01 01:52:09'),
+(2, 92, '2018-06-04 01:50:31'),
+(3, 93, '2018-06-04 02:42:24'),
+(4, 94, '2018-06-04 03:20:04'),
+(5, 95, '2018-06-04 06:31:56'),
+(6, 96, '2018-06-05 01:22:09'),
+(7, 97, '2018-06-05 01:38:55'),
+(8, 98, '2018-06-06 05:59:45'),
+(9, 99, '2018-06-06 07:10:57'),
+(10, 100, '2018-06-06 07:38:32'),
+(11, 101, '2018-06-13 01:09:12'),
+(12, 102, '2018-06-13 01:15:40'),
+(13, 103, '2018-06-14 02:01:28'),
+(14, 104, '2018-06-14 02:47:54'),
+(15, 105, '2018-06-14 08:10:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_menu`
+-- Cấu trúc bảng cho bảng `sys_menu`
 --
 
 CREATE TABLE `sys_menu` (
@@ -814,27 +713,26 @@ CREATE TABLE `sys_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `sys_menu`
+-- Đang đổ dữ liệu cho bảng `sys_menu`
 --
 
 INSERT INTO `sys_menu` (`menu_id`, `menu_title`, `menu_parent_id`, `menu_url`, `menu_index`, `menu_icon`, `module_name`) VALUES
 (1, 'DASHBOARD', 0, 'dashboard', 1, '<i class=\" md-dashboard\"></i>', 'dashboard'),
 (4, 'NGƯỜI DÙNG', 0, '', 3, '<i class=\"md-account-child\"></i>', '1'),
-(5, 'Quản lý nhóm User', 4, 'hethong/groups', 1, '<i class=\"fa fa-users\"></i>', '1'),
-(7, 'HÓA CHẤT', 0, '', 5, '<i class=\"md-battery-50\"></i>', 'hoachat'),
+(5, 'Quản lý nhóm User', 4, 'hethong/groups', 1, '<i class=\"fa fa-users\"></i>', 'user-group'),
+(7, 'HÓA CHẤT', 0, '', 5, '<i class=\"md-battery-50\"></i>', '1,2'),
 (9, 'Quản lý User', 4, 'hethong/users', 2, '<i class=\"fa fa-user\"></i>', 'users'),
 (10, 'HỆ THỐNG', 0, '', 2, '<i class=\"md-extension\"></i>', '1'),
-(11, 'Hóa chất gốc', 7, 'hoachat/chuangoc', 1, '<i class=\"md-beenhere\"></i>', 'chuangoc'),
+(11, 'Chuẩn gốc', 7, 'hoachat/chuangoc', 1, '<i class=\"md-beenhere\"></i>', 'chuangoc'),
 (13, 'TÀI LIỆU THAM KHẢO', 0, 'thamkhao', 6, '<i class=\"md-my-library-books\"></i>', 'thamkhao'),
-(15, 'Đơn vị', 10, 'hethong/donvi', 1, '', 'donvi'),
-(16, 'Menu', 10, 'hethong/sys_menu', 1, '', 'menu'),
-(17, 'excel', 10, 'hethong/test', 2, '', 'test'),
-(18, 'Mẫu', 0, 'mau/bvtvmau', 7, '', 'bvtvmau');
+(16, 'Menu', 10, 'hethong/sys_menu', 1, NULL, 'menu'),
+(17, 'Đơn vị', 10, 'hethong/donvi', 2, '', 'donvi'),
+(18, 'MẪU', 0, 'mau/bvtvmau', 7, '', 'bvtvmau');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_useronline`
+-- Cấu trúc bảng cho bảng `sys_useronline`
 --
 
 CREATE TABLE `sys_useronline` (
@@ -844,16 +742,17 @@ CREATE TABLE `sys_useronline` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `sys_useronline`
+-- Đang đổ dữ liệu cho bảng `sys_useronline`
 --
 
 INSERT INTO `sys_useronline` (`id`, `ip`, `timestamp`) VALUES
-(75, '::1', '2018-06-12 16:50:17');
+(12, '113.161.207.165', '2018-06-14 15:10:00'),
+(75, '::1', '2018-06-14 15:14:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -875,129 +774,123 @@ CREATE TABLE `users` (
   `sinhnhat` varchar(50) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `avatar` text,
-  `gioitinh` varchar(20) DEFAULT NULL,
+  `gioitinh` varchar(20) NOT NULL,
   `phanquyen` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `sinhnhat`, `phone`, `avatar`, `gioitinh`, `phanquyen`) VALUES
-(1, '127.0.0.1', 'Admin', '$2y$08$W4MjVDfFCqUN2nR9oYPSdet9egCrwT86le0oAOFLeiw/L76R7Tihy', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1528794908, 1, 'Lê Minh Vấn', '', '15-02-1992', '01667654356', '4.jpg', 'Nam', '1_0,1_1,1_2,1_3,1_4,4_0,5_0,5_1,5_2,5_3,5_4,9_0,9_1,9_2,9_3,9_4,7_0,11_0,11_1,11_2,11_3,11_4,10_0,15_0,15_1,15_2,15_3,15_4,16_0,16_1,16_2,16_3,16_4,17_0,17_1,17_2,17_3,17_4,13_0,13_1,13_2,13_3,13_4,18_0,18_1,18_2,18_3,18_4'),
-(15, '::1', 'user', '$2y$08$m8W4S597EmWdf5bpPCsOl.Bh.gzqILpc4g/PN4Kp7X7yFjmJetfEi', NULL, 'a@gmail.com', NULL, NULL, NULL, NULL, 1527309766, 1527313958, 1, 'user', NULL, '26-05-2018', '', '', 'Nam', '1_0,7_0,7_1,11_0'),
-(17, '::1', 'test', '$2y$08$M.S9aA96y7fwvXcNayb3KOXjUqNRZRyhEOe8gTqeU65sU6Ud.69aC', NULL, 'aa@gmail.com', NULL, NULL, NULL, NULL, 1527480200, 1527497360, 1, 'test', NULL, '28-05-2018', '01667663569', '', 'Nam', '4_0,9_0,9_1,7_0,11_0,11_1,11_2'),
-(18, '::1', 'test1', '$2y$08$ZXL1w3bKRPUVortyEm4x..Vgu/zPj8RMMFGjRnwT7jjl3uUoHn/te', NULL, 'leminhvan.92@gmail.com', NULL, NULL, NULL, NULL, 1527481654, 1527481671, 1, '1', NULL, '28-05-2018', '1111111111', '', 'Nam', ',7_0,11_0,11_1,14_0,14_1'),
-(19, '::1', 'test2', '$2y$08$emh6t4Q2NnuZi06yLRcr3ebTQs0Eai6gB/GFCI7ZyTUkZWOHRWiRa', NULL, 'leminhvan.92@gmail.co', NULL, NULL, NULL, NULL, 1527489059, NULL, 1, '2', NULL, '28-05-2018', '1111111111', '', 'Nam', '7_0,11_0');
+(1, '127.0.0.1', 'Admin', '$2y$08$W4MjVDfFCqUN2nR9oYPSdet9egCrwT86le0oAOFLeiw/L76R7Tihy', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1528963800, 1, 'Lê Minh Vấn', '', '15-02-1992', '01667654356', '4.jpg', 'Nam', '1_0,4_0,5_0,5_1,5_2,5_3,5_4,9_0,9_1,9_2,9_3,9_4,7_0,11_0,11_1,11_2,11_3,11_4,10_0,16_0,16_1,16_2,16_3,16_4,17_0,17_1,17_2,17_3,17_4,13_0,13_1,13_2,13_3,13_4,18_0,18_1,18_2,18_3,18_4'),
+(2, '::1', 'tuyetngan', '$2y$08$.uy9mc7Ks3AkJoFSwPlQFO8.fppaZNxHMfpwqq39JBlgevr2ELPVS', NULL, 'tuyetnganct@vinacert.vn', NULL, NULL, NULL, NULL, 1517895114, 1528852540, 1, 'Hứa Tuyết Ngân', '', '', '', '8.jpg', 'Nữ', '1_0,4_0,9_0,9_1,7_0,11_0,11_1,11_2,11_3,12_0,12_1,12_2,12_3,14_0,14_1,14_2,14_3,10_0,17_0,17_1,17_2,17_3,13_0,13_1,13_2,13_3');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_groups`
+-- Cấu trúc bảng cho bảng `users_groups`
 --
 
 CREATE TABLE `users_groups` (
   `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `group_id` mediumint(8) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users_groups`
+-- Đang đổ dữ liệu cho bảng `users_groups`
 --
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-(83, 1, 1),
-(84, 1, 2),
-(90, 15, 1),
-(92, 17, 2),
-(93, 18, 2),
-(94, 19, 2);
+(90, 1, 2),
+(89, 1, 1),
+(91, 2, 2);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `admin_preferences`
+-- Chỉ mục cho bảng `admin_preferences`
 --
 ALTER TABLE `admin_preferences`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bvtv_dangnenmau`
+-- Chỉ mục cho bảng `bvtv_dangnenmau`
 --
 ALTER TABLE `bvtv_dangnenmau`
   ADD PRIMARY KEY (`nenmau_id`);
 
 --
--- Indexes for table `bvtv_donvi`
+-- Chỉ mục cho bảng `bvtv_donvi`
 --
 ALTER TABLE `bvtv_donvi`
   ADD PRIMARY KEY (`donvi_id`);
 
 --
--- Indexes for table `bvtv_hc_goc`
+-- Chỉ mục cho bảng `bvtv_hc_goc`
 --
 ALTER TABLE `bvtv_hc_goc`
   ADD PRIMARY KEY (`hcgoc_id`);
 
 --
--- Indexes for table `bvtv_ketqua`
+-- Chỉ mục cho bảng `bvtv_ketqua`
 --
 ALTER TABLE `bvtv_ketqua`
   ADD PRIMARY KEY (`ketqua_id`);
 
 --
--- Indexes for table `bvtv_mau`
+-- Chỉ mục cho bảng `bvtv_mau`
 --
 ALTER TABLE `bvtv_mau`
   ADD PRIMARY KEY (`mau_id`);
 
 --
--- Indexes for table `bvtv_tailieu_thamkhao`
+-- Chỉ mục cho bảng `bvtv_tailieu_thamkhao`
 --
 ALTER TABLE `bvtv_tailieu_thamkhao`
   ADD PRIMARY KEY (`tk_id`);
 
 --
--- Indexes for table `groups`
+-- Chỉ mục cho bảng `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `login_attempts`
+-- Chỉ mục cho bảng `login_attempts`
 --
 ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sys_counter`
+-- Chỉ mục cho bảng `sys_counter`
 --
 ALTER TABLE `sys_counter`
   ADD PRIMARY KEY (`counter_id`);
 
 --
--- Indexes for table `sys_menu`
+-- Chỉ mục cho bảng `sys_menu`
 --
 ALTER TABLE `sys_menu`
   ADD PRIMARY KEY (`menu_id`);
 
 --
--- Indexes for table `sys_useronline`
+-- Chỉ mục cho bảng `sys_useronline`
 --
 ALTER TABLE `sys_useronline`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users_groups`
+-- Chỉ mục cho bảng `users_groups`
 --
 ALTER TABLE `users_groups`
   ADD PRIMARY KEY (`id`),
@@ -1006,103 +899,80 @@ ALTER TABLE `users_groups`
   ADD KEY `fk_users_groups_groups1_idx` (`group_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `admin_preferences`
+-- AUTO_INCREMENT cho bảng `admin_preferences`
 --
 ALTER TABLE `admin_preferences`
   MODIFY `id` tinyint(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `bvtv_dangnenmau`
+-- AUTO_INCREMENT cho bảng `bvtv_dangnenmau`
 --
 ALTER TABLE `bvtv_dangnenmau`
   MODIFY `nenmau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `bvtv_donvi`
+-- AUTO_INCREMENT cho bảng `bvtv_donvi`
 --
 ALTER TABLE `bvtv_donvi`
-  MODIFY `donvi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `donvi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `bvtv_hc_goc`
+-- AUTO_INCREMENT cho bảng `bvtv_hc_goc`
 --
 ALTER TABLE `bvtv_hc_goc`
-  MODIFY `hcgoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
+  MODIFY `hcgoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
 
 --
--- AUTO_INCREMENT for table `bvtv_ketqua`
---
-ALTER TABLE `bvtv_ketqua`
-  MODIFY `ketqua_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `bvtv_mau`
---
-ALTER TABLE `bvtv_mau`
-  MODIFY `mau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `bvtv_tailieu_thamkhao`
+-- AUTO_INCREMENT cho bảng `bvtv_tailieu_thamkhao`
 --
 ALTER TABLE `bvtv_tailieu_thamkhao`
-  MODIFY `tk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `tk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
 
 --
--- AUTO_INCREMENT for table `groups`
+-- AUTO_INCREMENT cho bảng `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `login_attempts`
+-- AUTO_INCREMENT cho bảng `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `sys_counter`
+-- AUTO_INCREMENT cho bảng `sys_counter`
 --
 ALTER TABLE `sys_counter`
-  MODIFY `counter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `counter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `sys_menu`
+-- AUTO_INCREMENT cho bảng `sys_menu`
 --
 ALTER TABLE `sys_menu`
   MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `sys_useronline`
+-- AUTO_INCREMENT cho bảng `sys_useronline`
 --
 ALTER TABLE `sys_useronline`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `users_groups`
+-- AUTO_INCREMENT cho bảng `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `users_groups`
---
-ALTER TABLE `users_groups`
-  ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
