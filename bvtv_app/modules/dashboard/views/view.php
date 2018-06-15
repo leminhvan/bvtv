@@ -19,7 +19,7 @@
                     <div class="chart stats-bar-2"></div>
                     <div class="count">
                         <small>Hôm nay</small>
-                        <h2><?php echo $count_users; ?></h2>
+                        <h2><?php echo $counter[2]; ?></h2>
                     </div>
                 </div>
             </div>

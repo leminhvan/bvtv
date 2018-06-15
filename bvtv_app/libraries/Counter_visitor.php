@@ -58,7 +58,7 @@ class Counter_visitor extends CI_Model
     public function count_day_month()
     {
       $count_month = 0; $count_day = 0;
-      $query = $this->db->query("SELECT * FROM sys_counter"); //lay data trong bang
+      $query = $this->db->query("SELECT * FROM sys_counter WHERE counter_id != 1"); //lay data trong bang
        //dem so trong ngay
           $temp = $query->result_array();
 //$a = array();
