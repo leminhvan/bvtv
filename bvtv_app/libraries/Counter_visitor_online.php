@@ -3,12 +3,12 @@
 class Counter_visitor_online extends CI_Model 
 {
 
-   var $timeoutSeconds = 300;//Đây là thời gian refresh tính bằng giây
+   var $timeoutSeconds = 5;//Đây là thời gian refresh tính bằng giây
     var $numberOfUsers = 1;//mặc định số người truy cập(ít nhất là 1 người đang xem - chính là bạn đó ^_^)
     function __construct()
     {
         parent::__construct();
-        
+        $this->timeoutSeconds = $this->config->item('user_expire', 'ion_auth');
      }
 
    
@@ -29,19 +29,19 @@ class Counter_visitor_online extends CI_Model
         $query=$this->db->get('sys_useronline');//$data->query("SELECT ip FROM sys_usersonline");
         $row = $query->result_array(); 
         if(count($row) > 0){
-        	foreach ($row as $key => $value) { //so sanh ip
-                  if($this->get_client_ip() == $value["ip"]){ //neu co ip
+        	foreach ($row as $key => $value) { //so sanh session id
+                  if(session_id() == $value["session"]){ 
                     $allow = false;
                       $data = array(
                           'timestamp' => $currentTime,
                       );
-                      $this->db->where('ip', $value["ip"]);
+                      $this->db->where('session', $value["session"]);
                       $this->db->update('sys_useronline', $data);
                     //}
                   }   else{
                   	$timeout = strtotime($currentTime) - strtotime($value["timestamp"]);
 		              if ($timeout > $this->timeoutSeconds) { //neu con trong thoi han thi up date thoi gian
-		              	$this->db->where('ip', $value["ip"]);
+		              	$this->db->where('session', $value["session"]);
 		                $this->db->delete('sys_useronline');
 		              }
                   }
@@ -53,6 +53,7 @@ class Counter_visitor_online extends CI_Model
         $data = array(
             'timestamp' => $currentTime,
             'ip' => $this->get_client_ip(),
+            'session' => session_id()
         );
         $this->db->insert('sys_useronline', $data);
       }
