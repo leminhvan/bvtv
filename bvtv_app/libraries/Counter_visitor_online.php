@@ -23,46 +23,38 @@ class Counter_visitor_online extends CI_Model
  
  
     function refresh() {
-      date_default_timezone_set('Asia/Ho_Chi_Minh'); //set mui gio, khong se bi sai
+        date_default_timezone_set('Asia/Ho_Chi_Minh'); //set mui gio, khong se bi sai
         $currentTime = date("Y-m-d H:i:s");
-        $allow=true; 
+
+        $this->db->where('session', session_id());        
         $query=$this->db->get('sys_useronline');//$data->query("SELECT ip FROM sys_usersonline");
         $row = $query->result_array(); 
-        if(count($row) > 0){
-        	foreach ($row as $key => $value) { //so sanh session id
-                  if(session_id() == $value["session"]){ 
-                    $allow = false;
-                      $data = array(
-                          'timestamp' => $currentTime,
-                      );
-                      $this->db->where('session', $value["session"]);
-                      $this->db->update('sys_useronline', $data);
-                    //}
-                  }   else{
-                  	$timeout = strtotime($currentTime) - strtotime($value["timestamp"]);
-		              if ($timeout > $this->timeoutSeconds) { //neu con trong thoi han thi up date thoi gian
-		              	$this->db->where('session', $value["session"]);
-		                $this->db->delete('sys_useronline');
-		              }
-                  }
-                  
-            }
+
+        if (count($row) == 0) {//insert khi k co
+          $data = array(
+              'timestamp' => $currentTime,
+              'ip' => $this->get_client_ip(),
+              'session' => session_id()
+          );
+          $this->db->insert('sys_useronline', $data);
+        }else{//update khi co
+          $data = array(
+              'timestamp' => $currentTime,
+          );
+          $this->db->where('session', session_id());
+          $this->db->update('sys_useronline', $data);            
         }
-            
-      if($allow){//neu chua co ip thi save
-        $data = array(
-            'timestamp' => $currentTime,
-            'ip' => $this->get_client_ip(),
-            'session' => session_id()
-        );
-        $this->db->insert('sys_useronline', $data);
-      }
-          $num = $this->db->get('sys_useronline')->num_rows();
-          //if($num > 0){
-            $this->numberOfUsers  = $num;//$num;
-          //}
-          
-      }
+var_dump($row);
+        //xóa khi het han
+        $timeout = strtotime($currentTime) - strtotime($row[0]["timestamp"]);
+        if ($timeout > $this->timeoutSeconds) { //
+          $this->db->where('session', $row[0]["session"]);
+          $this->db->delete('sys_useronline');
+        }
+
+        $num = $this->db->get('sys_useronline')->num_rows();
+        $this->numberOfUsers  = $num;          
+    }
 
       // Function to get the client IP address
       function get_client_ip() {
