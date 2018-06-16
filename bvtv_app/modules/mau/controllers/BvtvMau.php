@@ -7,14 +7,14 @@
  * Copyright 2018
  */
 
-class BvtvMau extends CI_Controller{
+class Bvtvmau extends CI_Controller{
   
     public function __construct(){
         parent::__construct();         
         $this->load->model('bvtvmau_model');
         $this->load->library(array('form_validation'));
          $this->load->library('counter_visitor_online');
-        $this->load->helper(array('form', 'url','notify_helper', 'bvtvFunctions'));
+        $this->load->helper(array('form', 'url','notify_helper', 'bvtvfunctions'));
         $this->lang->load('bvtvmau');
         if (!$this->ion_auth->logged_in() OR !$this->ion_auth->is_admin()) {
             redirect('login');

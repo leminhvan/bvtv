@@ -31,3 +31,7 @@ ERROR - 2018-06-15 12:40:10 --> Severity: Notice --> Undefined variable: timeout
 ERROR - 2018-06-15 12:40:30 --> Severity: Notice --> Undefined variable: timeout E:\host\www\bvtv\bvtv_app\libraries\Counter_visitor_online.php 50
 ERROR - 2018-06-15 12:41:52 --> Severity: Notice --> Undefined offset: 0 E:\host\www\bvtv\bvtv_app\libraries\Counter_visitor_online.php 49
 ERROR - 2018-06-15 12:41:53 --> Severity: Notice --> Undefined offset: 0 E:\host\www\bvtv\bvtv_app\libraries\Counter_visitor_online.php 51
+ERROR - 2018-06-15 16:47:04 --> Severity: Notice --> Undefined offset: 0 E:\host\www\bvtv\bvtv_app\libraries\Counter_visitor_online.php 49
+ERROR - 2018-06-15 16:47:04 --> Severity: Notice --> Undefined offset: 0 E:\host\www\bvtv\bvtv_app\libraries\Counter_visitor_online.php 51
+ERROR - 2018-06-15 16:52:33 --> Severity: Notice --> Undefined offset: 0 E:\host\www\bvtv\bvtv_app\libraries\Counter_visitor_online.php 49
+ERROR - 2018-06-15 16:52:33 --> Severity: Notice --> Undefined offset: 0 E:\host\www\bvtv\bvtv_app\libraries\Counter_visitor_online.php 51
