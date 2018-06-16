@@ -7,7 +7,7 @@ class Login extends CI_Controller {
     public function index()	{
         $this->load->library(array('form_validation'));
         $this->load->helper(array('form', 'url','notify_helper'));
-        $this->load->library('counter_visitor_online');
+        
 
         if ($this->ion_auth->logged_in()) {
             redirect('dashboard', 'refresh');
@@ -36,8 +36,10 @@ class Login extends CI_Controller {
     }
 
     public function logout() {
+        $session_id = session_id();
         if ($this->ion_auth->logout()) {
-            $this->counter_visitor_online->Counter_logout();
+            $this->load->library('counter_visitor_online');
+            $this->counter_visitor_online->Counter_logout($session_id);
             redirect('login');
         }
     }

@@ -60,9 +60,9 @@ class Counter_visitor_online extends CI_Model
         $this->numberOfUsers  = $num;          
     }
 
-    function counter_logout()
+    function Counter_logout($session_id)
     {
-      $this->db->where('session', session_id());
+      $this->db->where('session', $session_id);
       $this->db->delete('sys_useronline');
     }
 
