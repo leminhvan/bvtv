@@ -30,7 +30,7 @@ class Counter_visitor_online extends CI_Model
         $query=$this->db->get('sys_useronline');//$data->query("SELECT ip FROM sys_usersonline");
         $row = $query->result_array(); 
 
-        if (count($row) == 0) {//insert khi k co
+        if (count($row) <= 0) {//insert khi k co
           $data = array(
               'timestamp' => $currentTime,
               'ip' => $this->get_client_ip(),
@@ -43,16 +43,18 @@ class Counter_visitor_online extends CI_Model
           );
           $this->db->where('session', session_id());
           $this->db->update('sys_useronline', $data); 
-
-          //xóa khi het han
-          $timeout = strtotime($currentTime) - strtotime($row[0]["timestamp"]);
-          if ($timeout > $this->timeoutSeconds) { //
-            $this->db->where('session', $row[0]["session"]);
-            $this->db->delete('sys_useronline');
-          }           
         }
-//var_dump($row);
-        
+
+        //xóa khi het han
+        $query2=$this->db->get('sys_useronline');
+        $row2 = $query2->result_array(); 
+        foreach ($row2 as $key => $value) {
+          $timeout = strtotime($currentTime) - strtotime($value["timestamp"]);
+          if ($timeout > $this->timeoutSeconds) { //
+            $this->db->where('session', $value["session"]);
+            $this->db->delete('sys_useronline');
+          }  
+        }        
 
         $num = $this->db->get('sys_useronline')->num_rows();
         $this->numberOfUsers  = $num;          
