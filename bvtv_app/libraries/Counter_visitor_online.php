@@ -60,6 +60,12 @@ class Counter_visitor_online extends CI_Model
         $this->numberOfUsers  = $num;          
     }
 
+    function counter_logout()
+    {
+      $this->db->where('session', session_id());
+      $this->db->delete('sys_useronline');
+    }
+
       // Function to get the client IP address
       function get_client_ip() {
           $ipaddress = '';
