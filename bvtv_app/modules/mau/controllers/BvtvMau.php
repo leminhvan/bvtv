@@ -452,7 +452,7 @@ class Bvtvmau extends CI_Controller{
     public function add_ketqua($id = '') {
         if($this->menu->check_phanquyen("bvtvmau_3")){
             $this->data['bvtv_ketqua']           = $this->bvtvmau_model->add_ketqua();
-            $this->data['action']            = 'mau/bvtvmau/save_ketqua';
+            $this->data['action']            = 'mau/bvtvmau/save_ketqua/'.$id;
             $this->data['mau_id']			= $id;
             $this->data['donvi']			= $this->donvi;
  			$this->template->js_add('function tinh_kq(){
@@ -475,7 +475,7 @@ class Bvtvmau extends CI_Controller{
                                                 if(result.action == "ketqua"){ ///Doi thanh chon chuan
                                                 	console.log(result.data)
                                                 	if(result.data[0] != false){
-                                                		var re = "<input name=\'ketqua\' type=\'hidden\' value=\'" + result.data[0] + "\'/>";
+                                                		var re = "<input name=\'kq_phantram\' type=\'hidden\' value=\'" + result.data[0] + "\'/>";
                                                 		re += "<p> Kết quả: ";
                                                 		re += result.data[0].toFixed(3) + " " + result.data[1];
                                                 		re += ", Đánh giá: " + result.data[2];
@@ -507,13 +507,55 @@ class Bvtvmau extends CI_Controller{
     * Sửa data cho bvtv_ketqua
     *
     */
-    public function edit_ketqua($id='', $id_mau='') {
+    public function edit_ketqua($id_mau='', $id='') {
         if($this->menu->check_phanquyen("bvtvmau_3")){
             if ($id != ''){
                 $this->data['bvtv_ketqua']      = $this->bvtvmau_model->get_one_ketqua($id);
-                $this->data['action']       = 'mau/bvtvmau/save_ketqua/' . $id.'/'.$id_mau;           
-                $this->data['mau_id']			= $id_mau;
-                    
+                $this->data['action']       = 'mau/bvtvmau/save_ketqua/' .$id_mau.'/'.$id;           
+                $this->data['mau_id']           = $id;
+                $this->data['donvi']            = $this->donvi;
+                
+                $this->template->js_add('function tinh_kq(){
+                                        var mau_id = $("input[name=\'mau_id\'").val();
+                                        var sc1 = parseFloat($("#s_chuan1").val());
+                                        var sc2 = parseFloat($("#s_chuan2").val());
+                                        var mm = $("#m_mau").val();
+                                        var vm = $("#v_mau").val();
+                                        var sm = $("#s_mau").val();
+                                        var hl_dk = $("#hl_dk").val();
+                                        var dk_donvi = $("select[name=\'dk_donvi\'] :selected").attr("value");
+
+                                        var data ={"mau_id": mau_id, "sc": (sc1 + sc2)/2, "mm":mm, "vm":vm, "sm":sm, "hl_dk": hl_dk, "dk_donvi": dk_donvi, "action": "ketqua"}; 
+                                        var agrs = {
+                                            url : "'.base_url('mau/bvtvmau').'/ajax_action",
+                                            type : "get",
+                                            dataType:"json",
+                                            data : data,
+                                            success : function (result){
+                                                if(result.action == "ketqua"){ ///Doi thanh chon chuan
+                                                    console.log(result.data)
+                                                    if(result.data[0] != false){
+                                                        var re = "<input name=\'kq_phantram\' type=\'hidden\' value=\'" + result.data[0] + "\'/>";
+                                                        re += "<p> Kết quả: ";
+                                                        re += result.data[0].toFixed(3) + " " + result.data[1];
+                                                        re += ", Đánh giá: " + result.data[2];
+                                                        re += "</p>";                                                   
+                                                        $("#kq").html(re);
+                                                    }
+                                                    
+                                                }
+                                            }
+                                        };
+                                        $.ajax(agrs);
+                                    }', 'embed');
+            $this->template->js_add('$(".tinh_kq").on("keyup", function(){
+                                        tinh_kq();
+                                    });
+
+                                    $("select[name=\'dk_donvi\']").on("change", function(){
+                                        tinh_kq();
+                                    });', 'embed');
+
                 $this->template->load('index', 'ketqua/form',$this->data);
             } else{
                 $this->session->set_flashdata('notify', notify('Không thấy data','info'));
@@ -529,7 +571,7 @@ class Bvtvmau extends CI_Controller{
     * Cập nhật database  bvtv_ketqua
     *
     */
-    public function save_ketqua($id =NULL, $id_mau=''){
+    public function save_ketqua($id_mau='', $id =NULL){
         if($this->menu->check_phanquyen("bvtvmau_3")){
             // validation config
             $config = array(
@@ -554,7 +596,7 @@ class Bvtvmau extends CI_Controller{
                               redirect('mau/bvtvmau');
                           }
                       }else{ // If validation incorrect 
-                          $this->add_ketqua();
+                          $this->add_ketqua($id_mau);
                       }
              }
              else{ // Update data if Form Edit send Post and ID available
@@ -566,7 +608,7 @@ class Bvtvmau extends CI_Controller{
                             redirect('mau/bvtvmau');
                         }
                     } else{ // If validation incorrect 
-                        $this->edit_ketqua($id, $id_mau);
+                        $this->edit_ketqua($id_mau, $id);
                     }
              }
          }else{

@@ -291,6 +291,7 @@ class Bvtvmau_model extends CI_Model
             's_mau' => strip_tags($this->input->post('s_mau', TRUE)),
             'hl_dk' => strip_tags($this->input->post('hl_dk', TRUE)),
             'ngay_tao' => strip_tags($this->input->post('ngay_tao', TRUE)),
+            'kq_phantram' => strip_tags($this->input->post('kq_phantram', TRUE)) ? strip_tags($this->input->post('kq_phantram', TRUE)) : null,
         );
         $this->db->insert('bvtv_ketqua', $data);
         $data_mau = array('mau_ketqua' =>  $this->db->insert_id());
