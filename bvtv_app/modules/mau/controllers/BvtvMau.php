@@ -20,6 +20,7 @@ class Bvtvmau extends CI_Controller{
             redirect('login');
         }
         $this->counter_visitor_online->UsersOnline();
+        $this->donvi = array('%(w/w)' => '%(w/w)', '%(w/v)' => '%(w/v)', 'g/l' => 'g/l', 'g/kg' => 'g/kg');
     }
     
 
@@ -179,7 +180,7 @@ class Bvtvmau extends CI_Controller{
         if($this->menu->check_phanquyen("bvtvmau_2")){
             $this->data['bvtvmau']           = $this->bvtvmau_model->add();
             $this->data['action']            = 'mau/bvtvmau/save';
-            $this->data['donvi'] 			 = array('%' => '%', 'g/l' => 'g/l', 'g/kg' => 'g/kg');
+            $this->data['donvi'] 			 = $this->donvi;
             $this->template->js_add('assets/vendors/typehead/typeahead.bundle.js', "import");
             $this->template->css_add('assets/vendors/typehead/typehead-addin.css', "link" ); 
             $this->template->js_add('var ten = new Bloodhound({
@@ -237,7 +238,7 @@ class Bvtvmau extends CI_Controller{
     	if($this->menu->check_phanquyen("bvtvmau_2")){
     		$this->data['soluong']			 = strip_tags($this->input->get('soluong', TRUE)) ? strip_tags($this->input->get('soluong', TRUE)) : $soluong;
     		$this->data['bvtvmau']           = $this->bvtvmau_model->add();
-    		$this->data['donvi'] 			 = array('%' => '%', 'g/l' => 'g/l', 'g/kg' => 'g/kg');
+    		$this->data['donvi'] 			 = $this->donvi;
     		$this->data['nenmau']			 = $this->bvtvmau_model->get_nenmau();
             $this->data['action']            = 'mau/bvtvmau/save_more';
             $this->template->js_add('assets/vendors/typehead/typeahead.bundle.js', "import");
@@ -325,7 +326,7 @@ class Bvtvmau extends CI_Controller{
             if ($id != ''){
                 $this->data['bvtvmau']      = $this->bvtvmau_model->get_one($id);
                 $this->data['action']       = 'mau/bvtvmau/save/' . $id;           
-               $this->data['donvi'] 			 = array('%' => '%', 'g/l' => 'g/l', 'g/kg' => 'g/kg');
+               $this->data['donvi'] 		= $this->donvi;
                     
                 $this->template->load('index', 'form',$this->data);
             } else{
@@ -453,15 +454,18 @@ class Bvtvmau extends CI_Controller{
             $this->data['bvtv_ketqua']           = $this->bvtvmau_model->add_ketqua();
             $this->data['action']            = 'mau/bvtvmau/save_ketqua';
             $this->data['mau_id']			= $id;
- 
-            $this->template->js_add('$(".tinh_kq").on("keyup", function(){
-            							var sc1 = $("#s_chuan1").val();
-            							var sc2 = $("#s_chuan2").val();
-            							var sc = (sc1 + sc2)/2;
+            $this->data['donvi']			= $this->donvi;
+ 			$this->template->js_add('function tinh_kq(){
+ 										var mau_id = $("input[name=\'mau_id\'").val();
+ 										var sc1 = parseFloat($("#s_chuan1").val());
+            							var sc2 = parseFloat($("#s_chuan2").val());
             							var mm = $("#m_mau").val();
             							var vm = $("#v_mau").val();
             							var sm = $("#s_mau").val();
-            							var data ={"sc": sc, "mm":mm, "vm":vm, "sm":sm, "action": "ketqua"}; 
+            							var hl_dk = $("#hl_dk").val();
+            							var dk_donvi = $("select[name=\'dk_donvi\'] :selected").attr("value");
+
+            							var data ={"mau_id": mau_id, "sc": (sc1 + sc2)/2, "mm":mm, "vm":vm, "sm":sm, "hl_dk": hl_dk, "dk_donvi": dk_donvi, "action": "ketqua"}; 
                                         var agrs = {
                                             url : "'.base_url('mau/bvtvmau').'/ajax_action",
                                             type : "get",
@@ -469,12 +473,27 @@ class Bvtvmau extends CI_Controller{
                                             data : data,
                                             success : function (result){
                                                 if(result.action == "ketqua"){ ///Doi thanh chon chuan
-                                                    console.log(result.data);
+                                                	console.log(result.data)
+                                                	if(result.data[0] != false){
+                                                		var re = "<input name=\'ketqua\' type=\'hidden\' value=\'" + result.data[0] + "\'/>";
+                                                		re += "<p> Kết quả: ";
+                                                		re += result.data[0].toFixed(3) + " " + result.data[1];
+                                                		re += ", Đánh giá: " + result.data[2];
+                                                		re += "</p>";                                                	
+                                                    	$("#kq").html(re);
+                                                	}
+                                                	
                                                 }
                                             }
                                         };
-                                        // Truyền object vào để gọi ajax
                                         $.ajax(agrs);
+ 									}', 'embed');
+            $this->template->js_add('$(".tinh_kq").on("keyup", function(){
+            							tinh_kq();
+            						});
+
+            						$("select[name=\'dk_donvi\']").on("change", function(){
+            							tinh_kq();
             						});', 'embed');
 
             $this->template->load('index', 'ketqua/form',$this->data);
@@ -583,12 +602,72 @@ class Bvtvmau extends CI_Controller{
         	if($action == 'ketqua'){
         		//$temp1 =  strip_tags($this->input->get('chuan_id', TRUE));
         		//$chuan = $this->bvtvmau_model->get_chuan_info($temp1);
+        		$mau_id = strip_tags($this->input->get('mau_id', TRUE));
+        		$m_dv = $this->bvtvmau_model->get_one($mau_id);
+        		$titrong = 1.0025;
+
         		$mc = 10; $vc = 10; $pc = 100;
-        		$sc = strip_tags($this->input->get('sc', TRUE));
-        		$mm = strip_tags($this->input->get('mm', TRUE));
-        		$vm = strip_tags($this->input->get('vm', TRUE));
-        		$sm = strip_tags($this->input->get('sm', TRUE));
-        		$output->data = kq_phantram($mc, $vc, $pc, $sc, $mm, $vm, $sm);
+
+        		$sc = $this->input->get('sc', TRUE);
+        		$mm = $this->input->get('mm', TRUE);
+        		$vm = $this->input->get('vm', TRUE);
+        		$sm = $this->input->get('sm', TRUE);
+        		$dk_donvi = $this->input->get('dk_donvi', TRUE);
+        		$hl_dk = $this->input->get('hl_dk', TRUE);
+
+        		$w_w = w_w($mc, $vc, $pc, $sc, $mm, $vm, $sm);
+        		$w_v = w_v($w_w, $titrong);
+        		$g_l = g_l($w_w, $titrong);
+        		$g_kg = g_kg($w_w);
+
+        		$arr_re = array();
+        		switch ($m_dv['mau_donvi']) {
+					case '%(w/w)':
+						if($dk_donvi == 'g/l'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $g_l));
+						}
+						if($dk_donvi == 'g/kg'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $g_kg));
+						}
+						if($dk_donvi == '%(w/v)'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $w_v));
+						}
+						if($dk_donvi == '%(w/w)'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'],danh_gia_kq($dk_donvi, $hl_dk, $w_w));
+						}
+						break;
+					case '%(w/v)':
+						if($dk_donvi == 'g/l'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $g_l));
+						}
+						if($dk_donvi == '%(w/v)'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $w_v));
+						}
+						if($dk_donvi == '%(w/w)'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'],danh_gia_kq($dk_donvi, $hl_dk, $w_w));
+						}
+						break;
+					case 'g/l':
+						if($dk_donvi == 'g/l'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $g_l));
+						}
+						if($dk_donvi == '%(w/v)'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $w_v));
+						}
+						if($dk_donvi == '%(w/w)'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'],danh_gia_kq($dk_donvi, $hl_dk, $w_w));
+						}
+						break;
+					case 'g/kg':
+						if($dk_donvi == 'g/kg'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'], danh_gia_kq($dk_donvi, $hl_dk, $g_kg));
+						}
+						if($dk_donvi == '%(w/w)'){
+							$arr_re = array($w_w, $m_dv['mau_donvi'],danh_gia_kq($dk_donvi, $hl_dk, $w_w));
+						}
+						break;
+				}
+        		$output->data = $arr_re;// w_w($mc, $vc, $pc, $sc, $mm, $vm, $sm); danh_gia_kq('%(w/w)', 50, 52.50001)
         	}
 
         }

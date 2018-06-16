@@ -138,7 +138,7 @@
           
             <div class="form-group">
                 <label  for="hl_dk" class="col-sm-3 control-label"><?php echo lang('hl_dk').' '; ?></label>
-                <div class="col-sm-9">
+                <div class="col-sm-6">
                     <div class="fg-line">
                         <?php                  
                           echo form_input(
@@ -154,6 +154,14 @@
                         ?>
                     </div>
                     <small class="help-block c-red"> <?php echo form_error('hl_dk');?> </small>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="select">                                
+                          <?php   
+                            echo form_dropdown('dk_donvi',$donvi, '%', 'class = "form-control tinh_kq"');   
+                          ?>
+                     </div>
                 </div>
             </div>
           
@@ -174,6 +182,11 @@
                         ?>
                     </div>
                     <small class="help-block c-red"> <?php echo form_error('ngay_tao');?> </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12 text-center c-green" id="kq">
                 </div>
             </div>
             

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th6 14, 2018 lúc 08:16 AM
+-- Thời gian đã tạo: Th6 16, 2018 lúc 05:25 AM
 -- Phiên bản máy phục vụ: 5.7.21
 -- Phiên bản PHP: 5.6.33
 
@@ -407,9 +407,36 @@ CREATE TABLE `bvtv_mau` (
 --
 
 INSERT INTO `bvtv_mau` (`mau_id`, `mau_chitieu`, `mau_code`, `mau_ngaynhan`, `mau_ngaytra`, `mau_trangthai`, `mau_ketqua`, `mau_donvi`, `mau_dang`, `mau_luutru`, `mau_note`) VALUES
-(1, 'Azoxystrobin', 'VICB41800112', '06-06-2018', '14-06-2018', 2, '4', '%', 1, '54', ''),
-(2, 'Acetamiprid', 'VICB41801111', '09-06-2018', '22-06-2018', 0, '3', '%', 2, '0', ''),
-(3, 'Zineb', 'VICB41801111', '09-06-2018', '22-06-2018', 0, '', '%', 1, NULL, '');
+(1, 'Azoxystrobin', 'VICB41800112', '06-06-2018', '14-06-2018', 3, '4', '%(w/w)', 1, '54', ''),
+(2, 'Acetamiprid', 'VICB41801111', '09-06-2018', '22-06-2018', 0, '3', '%(w/w)', 2, '0', ''),
+(3, 'Zineb', 'VICB41801111', '09-06-2018', '22-06-2018', 0, '', '%(w/w)', 1, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bvtv_phuongphap`
+--
+
+CREATE TABLE `bvtv_phuongphap` (
+  `pp_id` int(11) NOT NULL,
+  `chitieu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `maso_sop` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phien_ban` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `hieu_luc` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `ten_sop` text COLLATE utf8_unicode_ci NOT NULL,
+  `nen_mau` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `17025` int(11) NOT NULL DEFAULT '0',
+  `chidinh` int(11) NOT NULL DEFAULT '0',
+  `pp_thu` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `note` text COLLATE utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `bvtv_phuongphap`
+--
+
+INSERT INTO `bvtv_phuongphap` (`pp_id`, `chitieu`, `maso_sop`, `phien_ban`, `hieu_luc`, `ten_sop`, `nen_mau`, `17025`, `chidinh`, `pp_thu`, `note`) VALUES
+(1, 'Azoxystrobin', '38', '02', '01-10-2017', 'Thuốc bảo vệ thực vật chứa hoạt chất Azoxystrobin - Xác định hàm lượng hoạt chất', '1,2', 1, 0, 'GC-FID', '');
 
 -- --------------------------------------------------------
 
@@ -680,7 +707,7 @@ CREATE TABLE `sys_counter` (
 --
 
 INSERT INTO `sys_counter` (`counter_id`, `count`, `timer`) VALUES
-(1, 105, '2018-06-01 01:52:09'),
+(1, 118, '2018-06-01 01:52:09'),
 (2, 92, '2018-06-04 01:50:31'),
 (3, 93, '2018-06-04 02:42:24'),
 (4, 94, '2018-06-04 03:20:04'),
@@ -694,7 +721,20 @@ INSERT INTO `sys_counter` (`counter_id`, `count`, `timer`) VALUES
 (12, 102, '2018-06-13 01:15:40'),
 (13, 103, '2018-06-14 02:01:28'),
 (14, 104, '2018-06-14 02:47:54'),
-(15, 105, '2018-06-14 08:10:00');
+(15, 105, '2018-06-14 08:10:00'),
+(16, 106, '2018-06-15 03:38:05'),
+(17, 107, '2018-06-15 04:12:13'),
+(18, 108, '2018-06-15 05:06:31'),
+(19, 109, '2018-06-15 05:06:58'),
+(20, 110, '2018-06-15 05:07:16'),
+(21, 111, '2018-06-15 05:41:53'),
+(22, 112, '2018-06-15 09:47:04'),
+(23, 113, '2018-06-16 01:16:26'),
+(24, 114, '2018-06-16 01:33:51'),
+(25, 115, '2018-06-16 01:35:49'),
+(26, 116, '2018-06-16 02:18:58'),
+(27, 117, '2018-06-16 02:19:13'),
+(28, 118, '2018-06-16 04:21:06');
 
 -- --------------------------------------------------------
 
@@ -727,7 +767,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_title`, `menu_parent_id`, `menu_url`, `
 (13, 'TÀI LIỆU THAM KHẢO', 0, 'thamkhao', 6, '<i class=\"md-my-library-books\"></i>', 'thamkhao'),
 (16, 'Menu', 10, 'hethong/sys_menu', 1, NULL, 'menu'),
 (17, 'Đơn vị', 10, 'hethong/donvi', 2, '', 'donvi'),
-(18, 'MẪU', 0, 'mau/bvtvmau', 7, '', 'bvtvmau');
+(18, 'MẪU', 0, 'mau/bvtvmau', 7, '<i class=\"md-whatshot\"></i>', 'bvtvmau');
 
 -- --------------------------------------------------------
 
@@ -738,6 +778,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_title`, `menu_parent_id`, `menu_url`, `
 CREATE TABLE `sys_useronline` (
   `id` int(11) NOT NULL,
   `ip` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `session` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `timestamp` varchar(40) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -745,9 +786,11 @@ CREATE TABLE `sys_useronline` (
 -- Đang đổ dữ liệu cho bảng `sys_useronline`
 --
 
-INSERT INTO `sys_useronline` (`id`, `ip`, `timestamp`) VALUES
-(12, '113.161.207.165', '2018-06-14 15:10:00'),
-(75, '::1', '2018-06-14 15:14:57');
+INSERT INTO `sys_useronline` (`id`, `ip`, `session`, `timestamp`) VALUES
+(116, '::1', 'gu9h1ksj3r9n2ndffhh771qheoqeculp', '2018-06-16 11:55:16'),
+(117, '::1', 'g9oc4030k825losv4p2arjunp088ipt7', '2018-06-16 12:12:03'),
+(118, '::1', 'amums297ohkpc73gcivnb4aj2qadu9lk', '2018-06-16 12:22:20'),
+(119, '::1', 'h7bod0q6uhd3a45me4klhrkmtcobludc', '2018-06-16 12:24:23');
 
 -- --------------------------------------------------------
 
@@ -783,7 +826,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `sinhnhat`, `phone`, `avatar`, `gioitinh`, `phanquyen`) VALUES
-(1, '127.0.0.1', 'Admin', '$2y$08$W4MjVDfFCqUN2nR9oYPSdet9egCrwT86le0oAOFLeiw/L76R7Tihy', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1528963800, 1, 'Lê Minh Vấn', '', '15-02-1992', '01667654356', '4.jpg', 'Nam', '1_0,4_0,5_0,5_1,5_2,5_3,5_4,9_0,9_1,9_2,9_3,9_4,7_0,11_0,11_1,11_2,11_3,11_4,10_0,16_0,16_1,16_2,16_3,16_4,17_0,17_1,17_2,17_3,17_4,13_0,13_1,13_2,13_3,13_4,18_0,18_1,18_2,18_3,18_4'),
+(1, '127.0.0.1', 'Admin', '$2y$08$W4MjVDfFCqUN2nR9oYPSdet9egCrwT86le0oAOFLeiw/L76R7Tihy', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1529122866, 1, 'Lê Minh Vấn', '', '15-02-1992', '01667654356', '4.jpg', 'Nam', '1_0,4_0,5_0,5_1,5_2,5_3,5_4,9_0,9_1,9_2,9_3,9_4,7_0,11_0,11_1,11_2,11_3,11_4,10_0,16_0,16_1,16_2,16_3,16_4,17_0,17_1,17_2,17_3,17_4,13_0,13_1,13_2,13_3,13_4,18_0,18_1,18_2,18_3,18_4'),
 (2, '::1', 'tuyetngan', '$2y$08$.uy9mc7Ks3AkJoFSwPlQFO8.fppaZNxHMfpwqq39JBlgevr2ELPVS', NULL, 'tuyetnganct@vinacert.vn', NULL, NULL, NULL, NULL, 1517895114, 1528852540, 1, 'Hứa Tuyết Ngân', '', '', '', '8.jpg', 'Nữ', '1_0,4_0,9_0,9_1,7_0,11_0,11_1,11_2,11_3,12_0,12_1,12_2,12_3,14_0,14_1,14_2,14_3,10_0,17_0,17_1,17_2,17_3,13_0,13_1,13_2,13_3');
 
 -- --------------------------------------------------------
@@ -846,6 +889,12 @@ ALTER TABLE `bvtv_ketqua`
 --
 ALTER TABLE `bvtv_mau`
   ADD PRIMARY KEY (`mau_id`);
+
+--
+-- Chỉ mục cho bảng `bvtv_phuongphap`
+--
+ALTER TABLE `bvtv_phuongphap`
+  ADD PRIMARY KEY (`pp_id`);
 
 --
 -- Chỉ mục cho bảng `bvtv_tailieu_thamkhao`
@@ -927,6 +976,12 @@ ALTER TABLE `bvtv_hc_goc`
   MODIFY `hcgoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
 
 --
+-- AUTO_INCREMENT cho bảng `bvtv_phuongphap`
+--
+ALTER TABLE `bvtv_phuongphap`
+  MODIFY `pp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT cho bảng `bvtv_tailieu_thamkhao`
 --
 ALTER TABLE `bvtv_tailieu_thamkhao`
@@ -948,7 +1003,7 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT cho bảng `sys_counter`
 --
 ALTER TABLE `sys_counter`
-  MODIFY `counter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `counter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `sys_menu`
@@ -960,7 +1015,7 @@ ALTER TABLE `sys_menu`
 -- AUTO_INCREMENT cho bảng `sys_useronline`
 --
 ALTER TABLE `sys_useronline`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
