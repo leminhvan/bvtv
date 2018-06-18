@@ -65,8 +65,7 @@ class Bvtvmau extends CI_Controller{
             		$value['mau_ketqua'] = '<a href="'.base_url('mau/bvtvmau/add_ketqua/'.$value['mau_id']).'" style="color: #009688; font-size: 18px;"><i class="md md-my-library-add"></i></a>';
             	}else{
             		$ketqua = $this->bvtvmau_model->get_one_ketqua($value['mau_ketqua']); //var_dump($ketqua);
-            		$value['mau_ketqua'] = '<a href="'.base_url('mau/bvtvmau/edit_ketqua/'.$value['mau_ketqua'].'/'.$value['mau_id']).'" style="color: #009688; font-size: 18px;">
-            									'.$ketqua['kq_phantram'].'
+            		$value['mau_ketqua'] = '<a href="'.base_url('mau/bvtvmau/edit_ketqua/'.$value['mau_id'].'/'.$value['mau_ketqua']).'" style="color: #009688; font-size: 18px;">'.$ketqua['kq_phantram'].'
             								</a>';
             	}
 
@@ -512,7 +511,7 @@ class Bvtvmau extends CI_Controller{
             if ($id != ''){
                 $this->data['bvtv_ketqua']      = $this->bvtvmau_model->get_one_ketqua($id);
                 $this->data['action']       = 'mau/bvtvmau/save_ketqua/' .$id_mau.'/'.$id;           
-                $this->data['mau_id']           = $id;
+                $this->data['mau_id']           = $id_mau;
                 $this->data['donvi']            = $this->donvi;
                 
                 $this->template->js_add('function tinh_kq(){

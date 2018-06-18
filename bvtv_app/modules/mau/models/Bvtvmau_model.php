@@ -177,7 +177,6 @@ class Bvtvmau_model extends CI_Model
             'mau_ngaynhan' => strip_tags($this->input->post('mau_ngaynhan', TRUE)),
             'mau_ngaytra' => strip_tags($this->input->post('mau_ngaytra', TRUE)),
             'mau_trangthai' => strip_tags($this->input->post('mau_trangthai', TRUE)),
-            'mau_ketqua' => strip_tags($this->input->post('mau_ketqua', TRUE)),
             'mau_donvi' => strip_tags($this->input->post('mau_donvi', TRUE)),
             'mau_dang' => strip_tags($this->input->post('mau_dang', TRUE)),
             'mau_luutru' => strip_tags($this->input->post('mau_luutru', TRUE)),
@@ -200,13 +199,24 @@ class Bvtvmau_model extends CI_Model
     */
     public function update($id)
     {
+       $temp =  $this->get_one($id);
+       $mau_ketqua = null;
+       $dv = $this->input->post('mau_donvi', TRUE);
+       //if(count($temp > 0)){
+            if($dv == $temp['mau_donvi']){
+                $mau_ketqua = $temp['mau_ketqua'];
+            }else{//xoa id ket qua trong bang kq
+                $this->destroy_keyqua($temp[0]['mau_ketqua']);
+            }
+       //}
+
         $data = array(
             'mau_chitieu' => strip_tags($this->input->post('mau_chitieu', TRUE)),
             'mau_code' => strip_tags($this->input->post('mau_code', TRUE)),
             'mau_ngaynhan' => strip_tags($this->input->post('mau_ngaynhan', TRUE)),
             'mau_ngaytra' => strip_tags($this->input->post('mau_ngaytra', TRUE)),
             'mau_trangthai' => strip_tags($this->input->post('mau_trangthai', TRUE)),
-            'mau_ketqua' => strip_tags($this->input->post('mau_ketqua', TRUE)),
+            'mau_ketqua' => $mau_ketqua, //phai tinh lai kq khi thay doi don vi
             'mau_donvi' => strip_tags($this->input->post('mau_donvi', TRUE)),
             'mau_dang' => strip_tags($this->input->post('mau_dang', TRUE)),
             'mau_luutru' => strip_tags($this->input->post('mau_luutru', TRUE)),
@@ -290,6 +300,7 @@ class Bvtvmau_model extends CI_Model
             'v_mau' => strip_tags($this->input->post('v_mau', TRUE)),
             's_mau' => strip_tags($this->input->post('s_mau', TRUE)),
             'hl_dk' => strip_tags($this->input->post('hl_dk', TRUE)),
+            'dk_donvi' => strip_tags($this->input->post('dk_donvi', TRUE)),
             'ngay_tao' => strip_tags($this->input->post('ngay_tao', TRUE)),
             'kq_phantram' => strip_tags($this->input->post('kq_phantram', TRUE)) ? strip_tags($this->input->post('kq_phantram', TRUE)) : null,
         );
@@ -321,7 +332,9 @@ class Bvtvmau_model extends CI_Model
                 'v_mau' => strip_tags($this->input->post('v_mau', TRUE)),
                 's_mau' => strip_tags($this->input->post('s_mau', TRUE)),
                 'hl_dk' => strip_tags($this->input->post('hl_dk', TRUE)),
+                'dk_donvi' => strip_tags($this->input->post('dk_donvi', TRUE)),
                 'ngay_tao' => strip_tags($this->input->post('ngay_tao', TRUE)),
+                'kq_phantram' => strip_tags($this->input->post('kq_phantram', TRUE)) ? strip_tags($this->input->post('kq_phantram', TRUE)) : null,
         );
         
         $this->db->where('ketqua_id', $id);
