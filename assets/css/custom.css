@@ -35,3 +35,5 @@
 .font-weight-bold{
     font-weight: bold;
 }
+
+.tooltip { pointer-events: none; }

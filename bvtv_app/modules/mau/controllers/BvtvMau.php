@@ -463,7 +463,6 @@ class Bvtvmau extends CI_Controller{
             $t                     = $this->bvtvmau_model->get_one($id);
             $this->data['mau_dv_hl'] = $t['mau_donvi'];
             $this->data['donvi']			= $this->donvi;
-            $this->template->js_add('assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js', 'import');
  			$this->template->js_add('function tinh_kq(){
  										var mau_id = $("input[name=\'mau_id\'").val();
  										var sc1 = parseFloat($("#s_chuan1").val());
@@ -504,33 +503,7 @@ class Bvtvmau extends CI_Controller{
             						$("select[name=\'dk_donvi\']").on("change", function(){
             							tinh_kq();
             						});', 'embed');
-            $this->template->js_add('$(document).ready(function(){
-                                        $("body").on("click", "#btn-color-targets > .btn", function(){
-                                            var color = $(this).data("target-color");
-                                            $("#modalColor").attr("data-modal-color", color);
-                                        });
-                                    });
-                                ', 'embed');
-
-            $this->template->js_add('var csrfName = "'.$this->security->get_csrf_token_name().'";
-                                    var csrfHash = "'.$this->security->get_csrf_hash().'";
-                                    var frm = $("#form_bvtv_ketqua");
-                                        frm.submit(function (e) {
-                                            e.preventDefault();
-                                            $.ajax({
-                                                type: frm.attr("method"),
-                                                url: frm.attr("action"),
-                                                data: frm.serialize(),
-                                                success: function (data) {
-                                                    console.log("Submission was successful.");
-                                                    console.log(data);
-                                                },
-                                                error: function (data) {
-                                                    console.log("An error occurred.");
-                                                    console.log(data);
-                                                },
-                                            });
-                                        });', 'embed');
+            
             $this->template->load('index', 'ketqua/form',$this->data);
         }else{
             $this->session->set_flashdata('notify', notify('Không có quyền truy cập','warning'));

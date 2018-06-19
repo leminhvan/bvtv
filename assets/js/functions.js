@@ -662,7 +662,7 @@ $(document).ready(function(){
      * Tooltips
      */
     if ($('[data-toggle="tooltip"]')[0]) {
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="tooltip"]').tooltip({ track: true });
     }
     
     /*
