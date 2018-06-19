@@ -158,8 +158,9 @@
 
                 <div class="col-sm-3">
                     <div class="select">                                
-                          <?php   
-                            echo form_dropdown('dk_donvi',$donvi, '%', 'class = "form-control tinh_kq"');   
+                          <?php 
+                          if(isset($mau_dv_hl)){$check = $mau_dv_hl;}  else{$check ='%w/w';}
+                            echo form_dropdown('dk_donvi',$donvi, $check, 'class = "form-control tinh_kq"');   
                           ?>
                      </div>
                 </div>

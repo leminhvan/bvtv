@@ -68,6 +68,10 @@ class Bvtvmau extends CI_Controller{
             		$value['mau_ketqua'] = '<a href="'.base_url('mau/bvtvmau/edit_ketqua/'.$value['mau_id'].'/'.$value['mau_ketqua']).'" style="color: #009688; font-size: 18px;">'.$ketqua['kq_phantram'].'
             								</a>';
             	}
+                if ($value['mau_luutru'] != NULL) {
+                    $value['mau_luutru'] = $value['mau_luutru'].' &#8451;';
+                }
+                
 
             	//tinh thoi han luu mau dua vao chi tieu tra sau cung, thoi gan 3 thang
 
@@ -405,6 +409,8 @@ class Bvtvmau extends CI_Controller{
         		}
         		if(count($temp) > 0){$this->db->insert('bvtv_mau', $temp);}
         	}
+            $this->session->set_flashdata('notify', notify('Thêm thành công','success'));
+            redirect('mau/bvtvmau');
 
            /* 
                 
@@ -453,6 +459,8 @@ class Bvtvmau extends CI_Controller{
             $this->data['bvtv_ketqua']           = $this->bvtvmau_model->add_ketqua();
             $this->data['action']            = 'mau/bvtvmau/save_ketqua/'.$id;
             $this->data['mau_id']			= $id;
+            $t                     = $this->bvtvmau_model->get_one($id);
+            $this->data['mau_dv_hl'] = $t['mau_donvi'];
             $this->data['donvi']			= $this->donvi;
  			$this->template->js_add('function tinh_kq(){
  										var mau_id = $("input[name=\'mau_id\'").val();

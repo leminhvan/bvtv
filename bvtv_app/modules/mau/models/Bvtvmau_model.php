@@ -206,7 +206,7 @@ class Bvtvmau_model extends CI_Model
             if($dv == $temp['mau_donvi']){
                 $mau_ketqua = $temp['mau_ketqua'];
             }else{//xoa id ket qua trong bang kq
-                $this->destroy_keyqua($temp[0]['mau_ketqua']);
+                $this->destroy_keyqua($temp['mau_ketqua']);
             }
        //}
 
