@@ -36,8 +36,8 @@
                 <div class="col-sm-10">
                     <div class="fg-line">
                         <?php    
-                        $code = '';
-                        if($chuangoc['hcgoc_vicb_code'] !='') {$code = $chuangoc['hcgoc_vicb_code'] ;}             
+                        $code = 'VICB4';
+                        //if($chuangoc['hcgoc_vicb_code'] !='') {$code = $chuangoc['hcgoc_vicb_code'] ;}             
                           echo form_input(
                                 array(
                                  'name'         => 'hcgoc_vicb_code',

@@ -42,12 +42,35 @@ class Chuangoc_model extends CI_Model
      *  Lấy tất cả data  bvtv_hc_goc
      *
      */
-    public function get_all() {
-
+    public function get_all_chuan() {
         $result = $this->db->get('bvtv_hc_goc');
-
         if ($result->num_rows() > 0)  {
-            return $result->result_array();
+            $re = array();
+            $temp = $result->result_array();
+            foreach ($temp as $key => $value) {
+                if(substr_count($value['hcgoc_vicb_code'], 'St') >=1 ){
+                    array_push($re, $value);
+                }
+            }
+            return $re;
+        } 
+        else {
+            return array();
+        }
+    }
+
+     public function get_hoachat($key_search=FALSE) {
+        $result = $this->db->get('bvtv_hc_goc');
+        if ($result->num_rows() > 0)  {
+            $re = array();
+            $temp = $result->result_array();
+            foreach ($temp as $key => $value) {
+                if(substr_count($value['hcgoc_vicb_code'], $key_search) >=1  ){
+                    array_push($re, $value);
+                }
+                
+            }
+            return $re;
         } 
         else {
             return array();

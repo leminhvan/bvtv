@@ -7,7 +7,7 @@
  * Copyright 2018
  */
 
-class Chuangoc extends CI_Controller{
+class Hoachatkhac extends CI_Controller{
     public function __construct(){
         parent::__construct();         
         $this->load->model('chuangoc_model');
@@ -33,10 +33,10 @@ class Chuangoc extends CI_Controller{
     * lấy tất cả row chuangoc
     *
     */
-    public function index($key_search = 'St'){
-        if($this->menu->check_phanquyen("chuangoc_1")){
+    public function index($key_search = 'So'){
+        if($this->menu->check_phanquyen("hoachatkhac_1")){
             
-            $source       = $this->chuangoc_model->get_hoachat($key_search);
+            $source       = $this->chuangoc_model->get_all_khac($key_search);
             foreach($source as $row):
                         $temp[] = $row;
             endforeach;
@@ -172,7 +172,7 @@ class Chuangoc extends CI_Controller{
             if($this->session->flashdata('notify') != NULL){
                 $this->template->js_add("notify('".$this->session->flashdata('notify')['message']."', '".$this->session->flashdata('notify')['type']."');",'embed');
             }
-            $this->template->load('index', 'chuangoc/view',$this->data);
+            $this->template->load('index', 'hoachatkhac/view',$this->data);
             unset( $temp); unset($source);
         }else{
             $this->session->set_flashdata('notify', notify('Không có quyền truy cập','warning'));

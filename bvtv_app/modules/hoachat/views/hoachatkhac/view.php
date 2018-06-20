@@ -1,11 +1,4 @@
 <div class="col-sm-12">
-    <div class="login-content">
-        <ul class="login-navigation" style="position: inherit;">
-            <li data-block="#l-login" class="bgm-green"><a href="<?php echo base_url('hoachat/chuangoc/index/St'); ?> " style="color: #fff;">Chuẩn</a></li>
-            <li data-block="#l-register" class="bgm-cyan"><a href="<?php echo base_url('hoachat/chuangoc/index/So'); ?> " style="color: #fff;">Dung môi</a></li>
-            <li data-block="#l-register" class="bgm-orange"><a href="<?php echo base_url('hoachat/chuangoc/index/Sa'); ?> " style="color: #fff;">Muối</a></li>
-        </ul>
-    </div>
     <div class="card">
         <div class="block-header" style="padding-top: 10px;">
             <ul class="tab-nav" role="tablist" data-tab-color="green">
@@ -26,6 +19,12 @@
             <!--end action menu -->
         </div>
         <div class="card-body table-responsive" style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px;">
+            <div class="login-content">
+                <ul class="login-navigation" style="position: inherit;">
+                    <li data-block="#l-login" class="bgm-green"><a href="<?php echo base_url('hoachat/hoachatkhac/index/St'); ?> " style="color: #fff;">Dung môi</a></li>
+                    <li data-block="#l-register" class="bgm-red">Register</li>
+                </ul>
+            </div>
             <div role="tabpanel" class="tab">
                 
                 

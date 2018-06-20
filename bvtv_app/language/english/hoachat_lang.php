@@ -13,7 +13,7 @@ $lang['head_title_chuangoc_saphethan'] = 'HÓA CHẤT SẮP HẾT HẠN';
 
   $lang['hcgoc_name']    = 'Tên';
   $lang['hcgoc_vicb_code']    = 'VICB code';
-  $lang['hcgoc_nhasx']    = 'Sản xuất';
+  $lang['hcgoc_nhasx']    = 'Hãng sản xuất';
   $lang['hcgoc_code']    = 'Code';
   $lang['hcgoc_lot']    = 'Lô/Lot';
   $lang['hcgoc_hamluong']    = 'Hàm lượng';

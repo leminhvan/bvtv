@@ -463,7 +463,6 @@ class Bvtvmau extends CI_Controller{
             $t                     = $this->bvtvmau_model->get_one($id);
             $this->data['mau_dv_hl'] = $t['mau_donvi'];
             $this->data['donvi']			= $this->donvi;
-            $this->template->js_add('assets/vendors/easypiechart/jquery.easypiechart.min.js', 'import');
  			$this->template->js_add('function tinh_kq(){
  										var mau_id = $("input[name=\'mau_id\'").val();
  										var sc1 = parseFloat($("#s_chuan1").val());
@@ -523,7 +522,7 @@ class Bvtvmau extends CI_Controller{
                 $this->data['action']       = 'mau/bvtvmau/save_ketqua/' .$id_mau.'/'.$id;           
                 $this->data['mau_id']           = $id_mau;
                 $this->data['donvi']            = $this->donvi;
-                $this->template->js_add('assets/vendors/easypiechart/jquery.easypiechart.min.js', 'import');
+                
                 $this->template->js_add('function tinh_kq(){
                                         var mau_id = $("input[name=\'mau_id\'").val();
                                         var sc1 = parseFloat($("#s_chuan1").val());
