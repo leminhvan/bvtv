@@ -87,3 +87,8 @@
   line-height: 1.428571429;
   border-radius: 15px;
 }
+
+/*  xoa gia tri % sau chu so cua pie-chart */
+.easy-pie .percent:after {
+    content: none!important;
+}

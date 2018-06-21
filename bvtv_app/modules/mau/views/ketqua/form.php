@@ -29,12 +29,23 @@
                         <div class="col-xs-12">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="control-label">First Name</label>
-                                    <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name"  />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Last Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" />
+                                    <label  for="mau_pp" class="col-sm-4 control-label">Phương pháp thử</label>
+                                    <div class="col-sm-5">
+                                        <div class="fg-line">
+                                            <?php                  
+                                              echo form_input(
+                                                    array(
+                                                     'name'         => 'mau_pp',
+                                                     'id'           => 'mau_pp',                       
+                                                     'class'        => 'form-control tinh_kq  required',
+                                                     'autocomplete' => 'off',
+                                                     'spellcheck'   => 'false'
+                                                     ),
+                                                     set_value('s_chuan1',$mau_pp)
+                                               );             
+                                            ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -45,64 +56,7 @@
                     </div>
                     <div class="row setup-content" id="step-2">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label  for="chuan_id" class="col-sm-1 control-label"><?php echo lang('chuan_id').'  <span class="c-red">*</span>'; ?></label>
-                                <div class="col-sm-3">
-                                    <div class="fg-line">
-                                        <?php                  
-                                          echo form_input(
-                                                array(
-                                                 'name'         => 'chuan_id',
-                                                 'id'           => 'chuan_id',                       
-                                                 'class'        => 'form-control autoten typehead  required tinh_kq',
-                                                 'autocomplete' => 'off',
-                                                 'maxlength'=>'11'
-                                                 ),
-                                                 set_value('chuan_id',$bvtv_ketqua['chuan_id'])
-                                           );             
-                                        ?>
-                                    </div>
-                                    <small class="help-block c-red"> <?php echo form_error('chuan_id');?> </small>
-                                </div>
-
-                                <label  for="s_chuan1" class="col-sm-2 control-label"><?php echo lang('s_chuan1').'  <span class="c-red">*</span>'; ?></label>
-                                <div class="col-sm-2">
-                                    <div class="fg-line">
-                                        <?php                  
-                                          echo form_input(
-                                                array(
-                                                 'name'         => 's_chuan1',
-                                                 'id'           => 's_chuan1',                       
-                                                 'class'        => 'form-control tinh_kq  required',
-                                                 'autocomplete' => 'off',
-                                                 
-                                                 ),
-                                                 set_value('s_chuan1',$bvtv_ketqua['s_chuan1'])
-                                           );             
-                                        ?>
-                                    </div>
-                                    <small class="help-block c-red"> <?php echo form_error('s_chuan1');?> </small>
-                                </div>
-
-                                <label  for="s_chuan2" class="col-sm-2 control-label"><?php echo lang('s_chuan2').'  <span class="c-red">*</span>'; ?></label>
-                                <div class="col-sm-2">
-                                    <div class="fg-line">
-                                        <?php                  
-                                          echo form_input(
-                                                array(
-                                                 'name'         => 's_chuan2',
-                                                 'id'           => 's_chuan2',                       
-                                                 'class'        => 'form-control tinh_kq  required',
-                                                 'autocomplete' => 'off',
-                                                 
-                                                 ),
-                                                 set_value('s_chuan2',$bvtv_ketqua['s_chuan2'])
-                                           );             
-                                        ?>
-                                    </div>
-                                    <small class="help-block c-red"> <?php echo form_error('s_chuan2');?> </small>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="col-sm-12 text-center" style="padding: 10px;">
                             <a href="<?php echo site_url('mau/bvtvmau'); ?>" class="btn btn-primary btn-sm" >Quay về trang mẫu</a>
@@ -150,12 +104,8 @@
                                     <small class="help-block c-red"> <?php echo form_error('s_chuan2');?> </small>
                                 </div>
 
-                                <label  for="s_chuantb" class="col-sm-1 control-label">TB: </label>
-                                <div class="col-sm-1">
-                                    <div class="fg-line">
-                                        <p id="s_chuantb"></p>
-                                    </div>
-                                </div>
+                                <label  id="s_chuantb" class="col-sm-2 control-label c-blue" style="text-align: left;"></label>
+                                
                             </div>
                         <hr>    
                             <div class="form-group">
@@ -218,7 +168,7 @@
                             </div>
                           <hr>
                             <div class="form-group">
-                                <label  for="hl_dk" class="col-sm-3 control-label"><?php echo lang('hl_dk').' '; ?></label>
+                                <label  for="hl_dk" class="col-sm-2 control-label"><?php echo lang('hl_dk').' '; ?></label>
                                 <div class="col-sm-2">
                                     <div class="fg-line">
                                         <?php                  
@@ -237,16 +187,17 @@
                                     <small class="help-block c-red"> <?php echo form_error('hl_dk');?> </small>
                                 </div>
 
+                                <label  for="dk_donvi" class="col-sm-2 control-label"><?php echo lang('dk_donvi').' '; ?></label>
                                 <div class="col-sm-2">
                                     <div class="select">                                
                                           <?php 
                                           if(isset($mau_dv_hl)){$check = $mau_dv_hl;}  else{$check ='%w/w';}
-                                            echo form_dropdown('dk_donvi',$donvi, $check, 'class = "form-control tinh_kq"');   
+                                            echo form_dropdown('dk_donvi',$donvi, $check, 'class = "form-control tinh_kq" id="dk_donvi"');   
                                           ?>
                                      </div>
                                 </div>
 
-                                <label  for="ngay_tao" class="col-sm-3 control-label"><?php echo lang('ngay_tao').'  <span class="c-red">*</span>'; ?></label>
+                                <label  for="ngay_tao" class="col-sm-2 control-label"><?php echo lang('ngay_tao').'  <span class="c-red">*</span>'; ?></label>
                                 <div class="col-sm-2">
                                     <div class="fg-line">
                                         <?php                  
@@ -265,17 +216,10 @@
                                 </div>
                             </div>
                           <hr>
-                            <div class="col-sm-12 text-center c-green" id="kq">
+                            <div class="col-sm-12 text-center" id="kq">
 
                             </div>
-                            <div class="col-sm-3">
-                                <div class="epc-item bgm-green">
-                                    <div class="easy-pie main-pie" data-percent="25">
-                                        <div class="percent">25</div>
-                                        <div class="pie-title">Spam Mails</div>
-                                    <canvas height="148" width="148"></canvas></div>
-                                </div>
-                            </div>
+                            
                          <hr>
                         </div>
 

@@ -16,7 +16,9 @@ class Bvtvmau_model extends CI_Model
         parent::__construct();
     }
 
-
+    public function __destruct() {  
+        $this->db->close();  
+    }  
     /**
      *  Lấy data pagination bvtv_mau
      *

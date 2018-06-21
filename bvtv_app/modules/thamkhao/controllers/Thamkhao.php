@@ -17,7 +17,7 @@ class Thamkhao extends CI_Controller{
         $this->load->helper(array('form', 'url','notify_helper'));
         $this->lang->load('thamkhao');
 
-        if (!$this->ion_auth->logged_in() OR !$this->ion_auth->is_admin()) {
+        if (!$this->ion_auth->logged_in()) {
             redirect('login');
         }
         $this->counter_visitor_online->UsersOnline();

@@ -154,24 +154,7 @@ $(document).ready(function(){
     });
 
 
-    /*
-     * Easy Pie Charts - Used in widgets
-     */
-    function easyPieChart(id, trackColor, scaleColor, barColor, lineWidth, lineCap, size) {
-        $('.'+id).easyPieChart({
-            trackColor: trackColor,
-            scaleColor: scaleColor,
-            barColor: barColor,
-            lineWidth: lineWidth,
-            lineCap: lineCap,
-            size: size
-        });
-    }
-    
-    if ($('.main-pie')[0]) {
-        easyPieChart('main-pie', 'rgba(255,255,255,0.2)', 'rgba(255,255,255,0.5)', 'rgba(255,255,255,0.7)', 7, 'butt', 148);
-    }
-
+   
 });
     
 $(document).ready(function () {
@@ -193,7 +176,11 @@ $(document).ready(function () {
             allWells.hide();
             $target.show();
             $target.find('input:eq(0)').focus();
+            
         }
+
+
+
     });
 
     allNextBtn.click(function(){

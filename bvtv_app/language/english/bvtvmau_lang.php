@@ -27,3 +27,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$lang['s_mau']    = 'S mẫu'; 
 	$lang['hl_dk']    = 'Hàm lượng ĐK'; 
 	$lang['ngay_tao']    = 'Ngày tạo';
+	$lang['dk_donvi']    = 'Đợn vị đăng ký';

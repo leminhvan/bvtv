@@ -16,7 +16,7 @@ class Bvtvmau extends CI_Controller{
          $this->load->library('counter_visitor_online');
         $this->load->helper(array('form', 'url','notify_helper', 'bvtvfunctions'));
         $this->lang->load('bvtvmau');
-        if (!$this->ion_auth->logged_in() OR !$this->ion_auth->is_admin()) {
+        if (!$this->ion_auth->logged_in()) {
             redirect('login');
         }
         $this->counter_visitor_online->UsersOnline();
@@ -462,6 +462,7 @@ class Bvtvmau extends CI_Controller{
             $this->data['mau_id']			= $id;
             $t                     = $this->bvtvmau_model->get_one($id);
             $this->data['mau_dv_hl'] = $t['mau_donvi'];
+            $this->data['mau_pp']    = $t['mau_chitieu'];
             $this->data['donvi']			= $this->donvi;
             $this->template->js_add('assets/vendors/easypiechart/jquery.easypiechart.min.js', 'import');
  			$this->template->js_add('function tinh_kq(){
@@ -485,9 +486,24 @@ class Bvtvmau extends CI_Controller{
                                                 	console.log(result.data)
                                                 	if(result.data[0] != false){
                                                 		var re = "<input name=\'kq_phantram\' type=\'hidden\' value=\'" + result.data[0] + "\'/>";
+                                                        var danhgia, ketqua;
+                                                        if(result.data[2] == "Đạt"){
+                                                            danhgia = \'<span class="c-green"><i class="md-event-available" style="font-size: 15px;"></i>\' + result.data[2] + "</span>";
+                                                        }else{
+                                                            danhgia = \'<span class="c-red"><i class="md-event-busy " style="font-size: 15px;"></i>\' +" " + result.data[2] + "</span>";
+                                                        }
+
+                                                        if(result.data[0] < 10){
+                                                            ketqua = result.data[0].toFixed(3);
+                                                        }else if(result.data[0] >= 10 && result.data[0] < 100){
+                                                            ketqua = result.data[0].toFixed(2);
+                                                        }else{
+                                                            ketqua = result.data[0].toFixed(1);
+                                                        }
+                                                        
                                                 		re += "<p> Kết quả: ";
-                                                		re += result.data[0].toFixed(3) + " " + result.data[1];
-                                                		re += ", Đánh giá: " + result.data[2];
+                                                		re += \'<span class="c-green" >\' + ketqua + " " + result.data[1] + "</span><br />";
+                                                		 re += "Đánh giá: " + danhgia;
                                                 		re += "</p>";                                                	
                                                     	$("#kq").html(re);
                                                 	}
@@ -503,7 +519,13 @@ class Bvtvmau extends CI_Controller{
 
             						$("select[name=\'dk_donvi\']").on("change", function(){
             							tinh_kq();
-            						});', 'embed');
+            						});
+                                    $("#s_chuan1, #s_chuan2").on("keyup", function(){
+                                        var s1 = parseFloat($("#s_chuan1").val());
+                                        var s2 = parseFloat($("#s_chuan2").val());
+                                        $("#s_chuantb").text("TB: " + (s1 + s2)/2);
+
+                                    })', 'embed');
             
             $this->template->load('index', 'ketqua/form',$this->data);
         }else{
@@ -547,7 +569,7 @@ class Bvtvmau extends CI_Controller{
                                                         var re = "<input name=\'kq_phantram\' type=\'hidden\' value=\'" + result.data[0] + "\'/>";
                                                         re += "<p> Kết quả: ";
                                                         re += result.data[0].toFixed(3) + " " + result.data[1];
-                                                        re += ", Đánh giá: " + result.data[2];
+                                                        re += ", Đánh giá: <i class=\'md-event-available\'></i>" + result.data[2];
                                                         re += "</p>";                                                   
                                                         $("#kq").html(re);
                                                     }
