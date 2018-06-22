@@ -115,6 +115,21 @@ class Bvtvmau_model extends CI_Model
         }
     }
 
+    public function get_one_phuongphap_name($pp_name)
+    {
+         $this->db->where('chitieu', $pp_name);
+        $result = $this->db->get('bvtv_phuongphap');
+
+        if ($result->num_rows() == 1) 
+        {
+            return $result->row_array();
+        } 
+        else 
+        {
+            return array();
+        }
+    }
+
     
     
     
@@ -361,6 +376,7 @@ class Bvtvmau_model extends CI_Model
         $this->db->delete('bvtv_ketqua');
         
     }
+
 
     
 

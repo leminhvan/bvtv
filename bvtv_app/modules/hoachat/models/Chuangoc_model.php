@@ -143,6 +143,21 @@ class Chuangoc_model extends CI_Model
         }
     }
 
+    public function get_one_pphoachat($id) 
+    {
+        $this->db->where('id_pp', $id);
+        $result = $this->db->get('bvtv_pphoachat');
+
+        if ($result->num_rows() == 1) 
+        {
+            return $result->row_array();
+        } 
+        else 
+        {
+            return array();
+        }
+    }
+
     
     
     
@@ -317,6 +332,29 @@ class Chuangoc_model extends CI_Model
         }
     }
 
+    public function get_pp_hc($pp_hc){
+        #Dùng để lấy mảng hc từ pphuowng pháp
+        # pp_hc có dạng: g_1,g_2,p_1,p_2,...
+        $re = array();
+        if($pp_hc != ''){
+            $t1 = explode(',', $pp_hc);
+            if(count($t1 > 0)){
+                foreach ($t1 as $value) {
+                    
+                    if(substr_count($value, '_') >=1 ){
+                        $t2 = explode('_', $value);
+                        $t3 = $this->get_one($t2[1]);
+                        $re['hcgoc'][] = $t3['hcgoc_name'];
+                    }else{
+                        $t3 = $this->get_one_pphoachat($value);
+                        $re['hcgoc'][] = $t3['ten_pp'];
+                    }
+                }
+            }
+        }
+        return $re;
+
+    }
     
 
 

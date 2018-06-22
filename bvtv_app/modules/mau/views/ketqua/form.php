@@ -14,11 +14,11 @@
                             <p>Phương pháp</p>
                         </div>
                         <div class="stepwizard-step">
-                            <a href="#step-2" type="button" class="btn btn-default btn-circle " >2</a>
+                            <a href="#step-2" id="step-hoachat" type="button" class="btn btn-default btn-circle " >2</a>
                             <p>Hóa chất</p>
                         </div>
                         <div class="stepwizard-step">
-                            <a href="#step-3" type="button" class="btn btn-default btn-circle " >3</a>
+                            <a href="#step-3" id="step-ketqua" type="button" class="btn btn-default btn-circle " >3</a>
                             <p>Tính kết quả</p>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                                                     array(
                                                      'name'         => 'mau_pp',
                                                      'id'           => 'mau_pp',                       
-                                                     'class'        => 'form-control tinh_kq  required',
+                                                     'class'        => 'form-control autoten typehead',
                                                      'autocomplete' => 'off',
                                                      'spellcheck'   => 'false'
                                                      ),

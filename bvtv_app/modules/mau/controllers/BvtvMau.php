@@ -464,7 +464,51 @@ class Bvtvmau extends CI_Controller{
             $this->data['mau_dv_hl'] = $t['mau_donvi'];
             $this->data['mau_pp']    = $t['mau_chitieu'];
             $this->data['donvi']			= $this->donvi;
-            $this->template->js_add('assets/vendors/easypiechart/jquery.easypiechart.min.js', 'import');
+            $this->template->js_add('assets/vendors/typehead/typeahead.bundle.js', "import");
+            $this->template->css_add('assets/vendors/typehead/typehead-addin.css', "link" ); 
+            $this->template->js_add('var ten = new Bloodhound({
+                                                      datumTokenizer: Bloodhound.tokenizers.whitespace,
+                                                      queryTokenizer: Bloodhound.tokenizers.whitespace,
+                                                      local: []
+                                                    });
+                                    ten.initialize();
+                                    function ajax_action(key, action) {
+                                        var data ={"key": key, "action": action}; 
+                                        var agrs = {
+                                            url : "'.base_url().'mau/bvtvmau/ajax_action", // gửi ajax đến file result.php
+                                            type : "get", // chọn phương thức gửi là post
+                                            dataType:"json", // dữ liệu trả về dạng text
+                                            data : data,
+                                            success : function (result){
+                                                if(result.action == "autoten"){
+                                                    ten.local = result.data;
+                                                    ten.initialize(true);
+                                                }
+
+                                                if(result.action == "get_pp"){
+                                                    console.log(result)
+                                                }  
+                                            }
+                                        };
+                                        // Truyền object vào để gọi ajax
+                                        $.ajax(agrs);
+
+                                        
+
+                                    }', "embed");
+            $this->template->js_add('$(".autoten").on( "click", function(){
+                                            ajax_action("", "autoten"); 
+                                        });
+                                    $(".autoten").typeahead({
+                                      hint: true,
+                                      highlight: true,
+                                      minLength: 1
+                                    },
+                                    {
+                                      name: "ten",
+                                      source: ten
+                                    });
+                                        ', "embed"); 
  			$this->template->js_add('function tinh_kq(){
  										var mau_id = $("input[name=\'mau_id\'").val();
  										var sc1 = parseFloat($("#s_chuan1").val());
@@ -525,7 +569,12 @@ class Bvtvmau extends CI_Controller{
                                         var s2 = parseFloat($("#s_chuan2").val());
                                         $("#s_chuantb").text("TB: " + (s1 + s2)/2);
 
-                                    })', 'embed');
+                                    })
+                                    $("#step-hoachat").on("click", function(){
+                                        var ten_pp = $("#mau_pp").val();
+                                        ajax_action(ten_pp, "get_pp");
+                                    });', 'embed');
+
             
             $this->template->load('index', 'ketqua/form',$this->data);
         }else{
@@ -672,6 +721,13 @@ class Bvtvmau extends CI_Controller{
             	$this->load->model('hoachat/chuangoc_model');
                 $output->data = $this->chuangoc_model->get_ten_hoachat();     
         	}
+
+            if ($action == "get_pp") {
+                $pp_name = strip_tags($this->input->get('key', TRUE));
+                $pp_hc = $this->bvtvmau_model->get_one_phuongphap_name($pp_name);
+                $this->load->model('hoachat/chuangoc_model');
+                $output->data = $this->chuangoc_model->get_pp_hc($pp_hc['hoachat']);     
+            }
 
         	if($action == 'ketqua'){
         		//$temp1 =  strip_tags($this->input->get('chuan_id', TRUE));
