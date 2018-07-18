@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'mysql.bvtv.svc',
 	'username' => 'root',
-	'password' => 'vertrigo',
+	'password' => 'admin',
 	'database' => 'admin',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
