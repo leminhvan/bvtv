@@ -412,9 +412,10 @@ class Chuangoc extends CI_Controller{
                         if ($this->input->post())  {
                             $this->chuangoc_model->update($id);
                             $this->session->set_flashdata('notify', notify('Update thành công','success'));
+                            redirect('hoachat/chuangoc');
                         }
                     } else{ // If validation incorrect 
-                        $this->edit($id,  $hc_hethan);
+                        $this->edit($id);
                     }
              }
          }else{

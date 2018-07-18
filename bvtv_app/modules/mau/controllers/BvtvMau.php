@@ -575,8 +575,18 @@ class Bvtvmau extends CI_Controller{
                                         ajax_action(ten_pp, "get_pp");
                                     });', 'embed');
 
+            $arr_cd = array('zineb');
+
+            $pp_hc = $this->bvtvmau_model->get_one_phuongphap_name($t['mau_chitieu']);
+            $this->load->model('hoachat/chuangoc_model');
+            $this->data['pp_hoachat'] = $this->chuangoc_model->get_pp_hc($pp_hc['hoachat']); 
+           
+            if(in_array(strtolower($t['mau_chitieu']), $arr_cd)){
+                $this->template->load('index', 'ketqua/form_cd',$this->data);
+            }else{
+                $this->template->load('index', 'ketqua/form',$this->data);
+            }
             
-            $this->template->load('index', 'ketqua/form',$this->data);
         }else{
             $this->session->set_flashdata('notify', notify('Không có quyền truy cập','warning'));
             redirect('mau/bvtvmau');
