@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mysql.bvtv.svc',
+	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'admin',
-	'database' => 'admin',
+	'database' => 'vertrigo',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
